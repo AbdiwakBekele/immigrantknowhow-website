@@ -13,7 +13,9 @@ const countries = ["United States", "Canada", "Europe", "Great Britain"];
 
 export default function Header() {
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const countryMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent) {
@@ -23,11 +25,19 @@ export default function Header() {
       ) {
         setIsCountryOpen(false);
       }
+
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
     }
 
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setIsCountryOpen(false);
+        setIsMobileMenuOpen(false);
       }
     }
 
@@ -41,7 +51,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="w-full border-b border-black/10 bg-white">
+    <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-6 lg:px-8 py-10">
         <Link href="/" aria-label="Immigrant Knowhow home" className="shrink-0">
           <Image
@@ -52,6 +62,37 @@ export default function Header() {
             priority
           />
         </Link>
+
+        <button
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-nav"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-[#1e1e1e] transition-colors hover:bg-black/5 md:hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-6 w-6"
+            aria-hidden="true"
+          >
+            {isMobileMenuOpen ? (
+              <path d="m18 6-12 12M6 6l12 12" />
+            ) : (
+              <>
+                <path d="M3 6h18" />
+                <path d="M3 12h18" />
+                <path d="M3 18h18" />
+              </>
+            )}
+          </svg>
+        </button>
 
         <nav
           aria-label="Primary"
@@ -114,7 +155,7 @@ export default function Header() {
           </div>
 
           <Link
-            href="#"
+            href="/contact"
             className="text-[18px]  font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
           >
             <span className="inline-flex items-center gap-1">Contact</span>
@@ -123,7 +164,7 @@ export default function Header() {
 
         <Link
           href="#"
-          className="inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-7.5 py-3 text-[20px] font-normal text-white transition-all duration-200 -translate-y-1 shadow-[0_10px_24px_rgba(15,98,253,0.42)] 
+          className="hidden md:inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-7.5 py-3 text-[20px] font-normal text-white transition-all duration-200 -translate-y-1 shadow-[0_10px_24px_rgba(15,98,253,0.42)] 
   hover:translate-y-0 hover:bg-[#0f62fd] hover:shadow-none"
         >
           <svg
@@ -157,6 +198,55 @@ export default function Header() {
           Become A Member
         </Link>
       </div>
+
+      {isMobileMenuOpen ? (
+        <div
+          id="mobile-nav"
+          ref={mobileMenuRef}
+          className="border-t border-black/10 bg-white px-4 py-4 md:hidden"
+        >
+          <nav aria-label="Mobile primary" className="flex flex-col gap-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-base font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <span className="pt-1 text-base font-medium text-[#0f62fd]">Country</span>
+            {countries.map((country) => (
+              <Link
+                key={country}
+                href="#"
+                className="pl-2 text-base text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {country}
+              </Link>
+            ))}
+
+            <Link
+              href="/contact"
+              className="pt-1 text-base font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Contact
+            </Link>
+
+            <Link
+              href="#"
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-2.5 text-base font-normal text-white transition-all duration-200 hover:bg-[#0f62fd]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Become A Member
+            </Link>
+          </nav>
+        </div>
+      ) : null}
     </header>
   );
 }
