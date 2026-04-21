@@ -17,7 +17,13 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 
-const quickLinks = ["Home", "Community", "Services", "Blog", "Contact"];
+const quickLinks: { label: string; href: string }[] = [
+  { label: "Home", href: "/" },
+  { label: "Community", href: "#" },
+  { label: "Services", href: "#" },
+  { label: "Blog", href: "#" },
+  { label: "Contact", href: "/contact" },
+];
 
 const socialItems: { label: string; href: string; icon: IconDefinition }[] = [
   { label: "Instagram", href: "#", icon: faInstagram },
@@ -54,12 +60,12 @@ export default function Footer() {
             <h3 className="text-[22px] font-bold text-black">Links</h3>
             <ul className="flex flex-col gap-4">
               {quickLinks.map((item) => (
-                <li key={item}>
+                <li key={item.label}>
                   <Link
-                    href="#"
-                    className="text-[16px] text-[#333] hover:text-[#0f62fd] transition-colors"
+                    href={item.href}
+                    className="text-[16px] text-[#333] transition-colors hover:text-[#0f62fd]"
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}

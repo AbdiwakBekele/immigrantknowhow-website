@@ -41,7 +41,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="w-full border-b border-black/10 bg-white">
+    <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-6 lg:px-8 py-10">
         <Link href="/" aria-label="Immigrant Knowhow home" className="shrink-0">
           <Image
@@ -114,7 +114,7 @@ export default function Header() {
           </div>
 
           <Link
-            href="#"
+            href="/contact"
             className="text-[18px]  font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
           >
             <span className="inline-flex items-center gap-1">Contact</span>
