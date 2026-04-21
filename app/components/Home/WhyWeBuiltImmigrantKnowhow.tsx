@@ -3,7 +3,7 @@ import MemberCTABlock from "./MemberCTABlock";
 
 export default function WhyWeBuiltImmigrantKnowhow() {
   return (
-    <section className="bg-white  text-[#111] sm:py-15 ">
+    <section className="bg-white  text-[#111] sm:py-15 py-15">
       <div className="mx-auto max-w-292.5 px-6 text-center lg:px-8">
         <h2 className="text-balance text-[32px] font-extrabold leading-tight tracking-tight text-black sm:text-[40px] lg:text-[44px]">
           Why We Built <span className="text-[#0f62fd]">Immigrant Knowhow</span>

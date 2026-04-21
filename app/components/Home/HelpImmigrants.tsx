@@ -45,35 +45,35 @@ const supportTopics = [
 
 export default function HelpImmigrants() {
   return (
-    <section className="bg-white py-14 text-[#111]">
-      <div className="mx-auto max-w-165.25">
-        <h2 className="mb-10 text-center text-[44px] font-extrabold leading-tight">
+    <section className="bg-white py-10 text-[#111] sm:py-12 lg:py-14">
+      <div className="mx-auto max-w-165.25 px-4 sm:px-6 lg:px-0">
+        <h2 className="mb-8 text-center text-[28px] font-extrabold leading-tight sm:mb-10 sm:text-[36px] lg:text-[44px]">
           We Help <span className="text-[#0f62fd]">Immigrants</span> Thrive in a
           New Country
         </h2>
       </div>
-      <div className="mx-auto grid max-w-292.5 max-h-[705.69px] items-start gap-12 px-6 lg:grid-cols-[1.05fr_1.3fr] lg:px-8">
-        <div className="relative min-h-256 w-full">
+      <div className="mx-auto grid max-w-292.5 items-start gap-8 px-4 sm:gap-10 sm:px-6 lg:max-h-[705.69px] lg:gap-12 lg:grid-cols-[1.05fr_1.3fr] lg:px-8">
+        <div className="relative w-full min-h-64 sm:min-h-96 lg:min-h-256">
           <Image
             src="/hepimmigrant.webp"
             alt="Immigrant Knowhow app and family visual"
             width="893"
             height="1024"
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         </div>
 
         <div>
-          <h2 className="max-w-172.5 text-[20px] leading-tight font-extrabold text-black">
+          <h2 className="max-w-172.5 text-[18px] leading-tight font-extrabold text-black sm:text-[19px] lg:text-[20px]">
             Most newcomers don&apos;t arrive with a guidebook.
           </h2>
-          <p className="mt-4 max-w-172.5 text-[20px] leading-[1.45] font-light text-black">
+          <p className="mt-3 max-w-172.5 text-[16px] leading-normal font-light text-black sm:mt-4 sm:text-[18px] lg:text-[20px] lg:leading-[1.45]">
             Immigrant Knowhow is your digital companion, built to help
             immigrants connect, share experiences, and get real support as they
             adjust to life in a new country.
           </p>
 
-          <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
+          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:mt-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-7">
             {supportTopics.map((topic) => (
               <li key={topic.title} className="flex items-start gap-3">
                 <Image
@@ -84,10 +84,10 @@ export default function HelpImmigrants() {
                   className="mt-1 h-[42px] w-[42px] shrink-0 object-contain"
                 />
                 <div>
-                  <h3 className="text-[17px] leading-tight font-extrabold text-black">
+                  <h3 className="text-[16px] leading-tight font-extrabold text-black sm:text-[17px]">
                     {topic.title}
                   </h3>
-                  <p className="mt-1 text-[16px] leading-[1.45] font-light text-black">
+                  <p className="mt-1 text-[15px] leading-[1.45] font-light text-black sm:text-[16px]">
                     {topic.description}
                   </p>
                 </div>

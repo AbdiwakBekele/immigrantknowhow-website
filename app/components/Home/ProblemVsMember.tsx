@@ -21,15 +21,15 @@ const solutionPoints = [
 
 export default function ProblemVsMember() {
   return (
-    <section className="bg-white py-14 text-[#111]">
-      <div className="mx-auto max-w-292.5 max-h-102.5 px-10 lg:px-8">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-0">
+    <section className="bg-white py-10 text-[#111] sm:py-12 lg:py-14">
+      <div className="mx-auto max-w-292.5 px-4 sm:px-6 lg:max-h-102.5 lg:px-8">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-stretch lg:gap-0">
           {/* Left column */}
           <div className="flex-1 ">
-            <h2 className="text-[20px] font-extrabold leading-tight text-black sm:text-[24px]">
+            <h2 className="text-[18px] font-extrabold leading-tight text-black sm:text-[22px] lg:text-[24px]">
               The Problem Without Support
             </h2>
-            <p className="mt-3 text-[20px] leading-relaxed  sm:text-[17px]">
+            <p className="mt-3 text-[16px] leading-relaxed sm:text-[17px] lg:text-[17px]">
               New immigrants often face overwhelming challenges, alone.
             </p>
             <ul className="mt-6 space-y-4">
@@ -39,7 +39,7 @@ export default function ProblemVsMember() {
                     icon={faTimesCircle}
                     className="mt-0.5 h-5 w-5 shrink-0 "
                   />
-                  <span className="text-[20px] leading-snug font-normal sm:text-[17px]">
+                  <span className="text-[16px] leading-snug font-normal sm:text-[17px] lg:text-[17px]">
                     {point}
                   </span>
                 </li>
@@ -63,11 +63,11 @@ export default function ProblemVsMember() {
 
           {/* Right column */}
           <div className="flex-1 lg:pl-10">
-            <h2 className="text-[20px] font-extrabold leading-tight text-black sm:text-[24px]">
+            <h2 className="text-[18px] font-extrabold leading-tight text-black sm:text-[22px] lg:text-[24px]">
               With <span className="text-[#0f62fd]">Immigrant KnowHow</span>{" "}
               Member
             </h2>
-            <p className="mt-3 text-[20px] leading-relaxed  sm:text-[17px]">
+            <p className="mt-3 text-[16px] leading-relaxed sm:text-[17px] lg:text-[17px]">
               Get the support you need, from people who understand.
             </p>
             <ul className="mt-6 space-y-4">
@@ -77,7 +77,7 @@ export default function ProblemVsMember() {
                     icon={faCircleCheck}
                     className="mt-0.5 h-5 w-5 shrink-0 "
                   />
-                  <span className="text-[20px] font-normal  sm:text-[17px]">
+                  <span className="text-[16px] font-normal sm:text-[17px] lg:text-[17px]">
                     {point}
                   </span>
                 </li>

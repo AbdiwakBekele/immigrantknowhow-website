@@ -58,9 +58,31 @@ const splitQuote = (quote: string) => {
 function TestimonialCarousel({
   testimonials: items,
 }: TestimonialCarouselProps) {
-  const canRotate = items.length >= 3;
+  const [cardsPerPage, setCardsPerPage] = useState(3);
+  const canRotate = items.length > cardsPerPage;
   const slideCount = canRotate ? items.length : 1;
   const [activePage, setActivePage] = useState(0);
+
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setCardsPerPage(1);
+        return;
+      }
+
+      if (window.innerWidth < 1024) {
+        setCardsPerPage(2);
+        return;
+      }
+
+      setCardsPerPage(3);
+    };
+
+    updateCardsPerPage();
+    window.addEventListener("resize", updateCardsPerPage);
+
+    return () => window.removeEventListener("resize", updateCardsPerPage);
+  }, []);
 
   useEffect(() => {
     if (slideCount <= 1) return;
@@ -72,6 +94,12 @@ function TestimonialCarousel({
     return () => clearInterval(timer);
   }, [slideCount]);
 
+  useEffect(() => {
+    if (activePage >= slideCount) {
+      setActivePage(0);
+    }
+  }, [activePage, slideCount]);
+
   const goToPrevious = () => {
     setActivePage((current) => (current === 0 ? slideCount - 1 : current - 1));
   };
@@ -81,12 +109,12 @@ function TestimonialCarousel({
   };
 
   return (
-    <div className="relative mx-auto max-w-[1120px] px-10">
+    <div className="relative mx-auto max-w-[1120px] px-4 sm:px-8 lg:px-10">
       <button
         onClick={goToPrevious}
         aria-label="Previous testimonials"
         disabled={slideCount <= 1}
-        className="absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#2563eb] bg-white text-[#2563eb] transition hover:bg-[#2563eb] hover:text-white disabled:invisible"
+        className="absolute left-0 top-1/2 z-20 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#2563eb] bg-white text-[#2563eb] transition hover:bg-[#2563eb] hover:text-white disabled:invisible sm:flex"
       >
         <svg
           width="18"
@@ -109,13 +137,13 @@ function TestimonialCarousel({
         >
           {Array.from({ length: slideCount }, (_, pageIndex) => {
             const pageItems = canRotate
-              ? [0, 1, 2].map((k) => items[(pageIndex + k) % items.length])
+              ? Array.from({ length: cardsPerPage }, (_, k) => items[(pageIndex + k) % items.length])
               : items;
 
             return (
               <div
                 key={pageIndex}
-                className="flex w-full h-full shrink-0 justify-center gap-6"
+                className="flex h-full w-full shrink-0 justify-center gap-4 lg:gap-6"
               >
                 {pageItems.map((item) => {
                   const quote = splitQuote(item.quote);
@@ -129,24 +157,24 @@ function TestimonialCarousel({
                       <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-[20px] border border-[#2563eb]" />
 
                       {/* card */}
-                      <figure className="relative flex h-full min-h-[360px] flex-col justify-between rounded-[20px] border border-[#e5e7eb] bg-white p-8 shadow-[0_3px_10px_rgba(0,0,0,0.06)]">
+                      <figure className="relative flex h-full min-h-[320px] flex-col justify-between rounded-[20px] border border-[#e5e7eb] bg-white p-6 shadow-[0_3px_10px_rgba(0,0,0,0.06)] sm:min-h-[340px] sm:p-7 lg:min-h-[360px] lg:p-8">
                         <blockquote className="space-y-5">
-                          <strong className="block text-[19px] font-extrabold leading-[1.35] text-[#111111]">
+                          <strong className="block text-[17px] font-extrabold leading-[1.35] text-[#111111] sm:text-[18px] lg:text-[19px]">
                             {quote.headline}
                           </strong>
 
                           {quote.body && (
-                            <p className="text-[17px] leading-[1.55] text-[#1f2937]">
+                            <p className="text-[15px] leading-[1.55] text-[#1f2937] sm:text-[16px] lg:text-[17px]">
                               {quote.body}
                             </p>
                           )}
                         </blockquote>
 
-                        <figcaption className="mt-10">
-                          <div className="text-[19px] font-extrabold leading-[1.2] text-[#111111]">
+                        <figcaption className="mt-8 sm:mt-9 lg:mt-10">
+                          <div className="text-[17px] font-extrabold leading-[1.2] text-[#111111] sm:text-[18px] lg:text-[19px]">
                             {item.author}
                           </div>
-                          <div className="mt-1 text-[17px] leading-none text-[#1f2937]">
+                          <div className="mt-1 text-[15px] leading-none text-[#1f2937] sm:text-[16px] lg:text-[17px]">
                             {item.location}
                           </div>
                         </figcaption>
@@ -164,7 +192,7 @@ function TestimonialCarousel({
         onClick={goToNext}
         aria-label="Next testimonials"
         disabled={slideCount <= 1}
-        className="absolute right-0 top-1/2 z-20 flex h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#2563eb] bg-white text-[#2563eb] transition hover:bg-[#2563eb] hover:text-white disabled:invisible"
+        className="absolute right-0 top-1/2 z-20 hidden h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#2563eb] bg-white text-[#2563eb] transition hover:bg-[#2563eb] hover:text-white disabled:invisible sm:flex"
       >
         <svg
           width="18"
@@ -199,17 +227,17 @@ function TestimonialCarousel({
 
 export default function MemberTestimonials() {
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-extrabold">
+    <section className="py-10 sm:py-12 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-2xl font-extrabold sm:text-3xl">
           What Our <span className="text-blue-600">Members Say</span>
         </h2>
 
-        <div className="mt-12">
+        <div className="mt-8 sm:mt-10 lg:mt-12">
           <TestimonialCarousel testimonials={testimonials} />
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-8 flex justify-center sm:mt-10 lg:mt-12">
           <MemberCTABlock align="center" />
         </div>
       </div>
