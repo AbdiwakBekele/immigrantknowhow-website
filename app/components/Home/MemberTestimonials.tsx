@@ -65,24 +65,25 @@ function TestimonialCarousel({
 
   useEffect(() => {
     const updateCardsPerPage = () => {
+      let nextCardsPerPage = 3;
+
       if (window.innerWidth < 640) {
-        setCardsPerPage(1);
-        return;
+        nextCardsPerPage = 1;
+      } else if (window.innerWidth < 1024) {
+        nextCardsPerPage = 2;
       }
 
-      if (window.innerWidth < 1024) {
-        setCardsPerPage(2);
-        return;
-      }
+      const nextSlideCount = items.length > nextCardsPerPage ? items.length : 1;
 
-      setCardsPerPage(3);
+      setCardsPerPage(nextCardsPerPage);
+      setActivePage((current) => (current >= nextSlideCount ? 0 : current));
     };
 
     updateCardsPerPage();
     window.addEventListener("resize", updateCardsPerPage);
 
     return () => window.removeEventListener("resize", updateCardsPerPage);
-  }, []);
+  }, [items.length]);
 
   useEffect(() => {
     if (slideCount <= 1) return;
@@ -93,12 +94,6 @@ function TestimonialCarousel({
 
     return () => clearInterval(timer);
   }, [slideCount]);
-
-  useEffect(() => {
-    if (activePage >= slideCount) {
-      setActivePage(0);
-    }
-  }, [activePage, slideCount]);
 
   const goToPrevious = () => {
     setActivePage((current) => (current === 0 ? slideCount - 1 : current - 1));
