@@ -8,10 +8,10 @@ import TurningLonelinessConnection from '@/app/components/Home/TurningLoneliness
 import WelcomeSection from '@/app/components/Home/WelcomeSection'
 import WhyImmigrantsTrust from '@/app/components/Home/WhyImmigrantsTrust'
 import WhyWeBuiltImmigrantKnowhow from '@/app/components/Home/WhyWeBuiltImmigrantKnowhow'
+import HomeHeader from './shared/HomeHeader'
 import { faqs, heroChecklist, howItWorks, joinUrl, services, testimonialCards, thriveCards } from './shared/data'
 import { CountryPageConfig } from './shared/country-pages'
 import CountryHeroSection from './shared/CountryHeroSection'
-import CountryNavDropdown from './shared/CountryNavDropdown'
 import {
   CountryCompareSection,
   CountryHighlightsSection,
@@ -44,26 +44,7 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
 
   return (
     <main className="ikh-page">
-      <header className="ikh-header">
-        <div className="ikh-shell ikh-header__inner">
-          <Link href="/" className="ikh-logo-link" aria-label="Immigrant Knowhow home">
-            <img src={asset('2024/05/ImmigrantsKnowHow-Logo.svg')} alt="ImmigrantsKnowHow Logo" className="ikh-logo" />
-          </Link>
-
-          <nav className="ikh-nav" aria-label="Primary navigation">
-            <a href="#services">Services</a>
-            <CountryNavDropdown />
-            <a href="#contact">Contact</a>
-          </nav>
-
-          <PrimaryButton joinUrl={joinUrl}>Become A Member</PrimaryButton>
-          <button className="ikh-menu" aria-label="Menu" type="button">
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-      </header>
+      <HomeHeader joinUrl={joinUrl} logoSrc={asset('2024/05/ImmigrantsKnowHow-Logo.svg')} />
 
       {isCountryPage ? (
         <CountryHeroSection config={config} joinUrl={joinUrl} />

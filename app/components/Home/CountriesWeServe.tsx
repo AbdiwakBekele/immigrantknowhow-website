@@ -32,7 +32,7 @@ export default function CountriesWeServe() {
   return (
     <section className="text-[#111] mt-15">
       {/* Top Banner */}
-      <div className="relative bg-[#1a1a1a] py-[59px] lg:py-[75px]">
+      <div className="relative bg-[#1a1a1a] py-10 sm:py-12 lg:py-[75px]">
         {/* Background */}
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.42] z-0"
@@ -40,21 +40,21 @@ export default function CountriesWeServe() {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-292.5 px-6 lg:px-8">
-          <div className="grid items-start gap-10 lg:grid-cols-3 lg:gap-14 xl:gap-16">
+        <div className="relative mx-auto max-w-[1170px] px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-3 lg:gap-14 xl:gap-16">
             {/* Left Image (TOP layer) */}
-            <div className="relative z-0 mx-auto w-full max-w-xl lg:mx-0 lg:w-[466px] lg:max-w-none col-span-1 -mt-8 lg:-mt-12">
+            <div className="relative z-0 col-span-1 mx-auto -mt-4 w-full max-w-[320px] sm:max-w-[420px] lg:mx-0 lg:-mt-12 lg:w-[466px] lg:max-w-none">
               <Image
                 src="/Immigration-services-by-following-Countries-we-serve-image.webp"
                 alt="Family with luggage ready to build a new life abroad"
                 width={666}
                 height={1024}
-                className="w-full max-h-[525px] object-contain object-bottom lg:scale-[1.46] lg:origin-bottom-left lg:-translate-x-[170px] lg:translate-y-[148px]"
+                className="mx-auto block w-full max-w-[390px] max-h-[620px] object-contain object-bottom sm:max-w-[460px] sm:max-h-[680px] lg:max-w-none lg:w-full lg:max-h-[525px] lg:scale-[1.46] lg:origin-bottom-left lg:-translate-x-[170px] lg:translate-y-[148px]"
               />
             </div>
 
             {/* Right Content */}
-            <div className="relative z-10 text-white col-span-2 lg:pl-10 xl:pl-14">
+            <div className="relative z-10 col-span-2 text-white lg:pl-10 xl:pl-14">
               <h2 className="text-balance text-[26px] font-extrabold leading-[1.1] tracking-tight sm:text-[34px] lg:text-[40px]">
                 Available in These{" "}
                 <span className="text-[#5eb0ff]">Countries</span>
@@ -65,7 +65,7 @@ export default function CountriesWeServe() {
                 serve.
               </p>
 
-              <p className="mt-5 text-[17px] leading-relaxed text-white/80 sm:text-[18px] lg:max-w-[520px]">
+              <p className="mt-5 text-[16px] leading-relaxed text-white/80 sm:text-[18px] lg:max-w-[520px]">
                 Your journey is different depending on where you land.
                 That&apos;s why Immigrant Knowhow offers dedicated spaces for
                 each region, with services, community, and expert support
@@ -74,7 +74,7 @@ export default function CountriesWeServe() {
 
               <div className="mt-8 flex items-center gap-3">
                 <span className="inline-block h-9 w-1 shrink-0 rounded-full bg-[#2b6bf3]" />
-                <p className="text-[20px] font-semibold tracking-tight text-white sm:text-[21px]">
+                <p className="text-[18px] font-semibold tracking-tight text-white sm:text-[21px]">
                   Choose your country to begin.
                 </p>
               </div>
@@ -85,12 +85,12 @@ export default function CountriesWeServe() {
 
       {/* Cards Section */}
       <div className="bg-white">
-        <div className="relative z-30 mx-auto -mt-[182px] max-w-292.5 px-6 sm:-mt-[198px] lg:-mt-[214px] lg:px-8">
-          <ul className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative z-30 mx-auto -mt-[110px] max-w-[1170px] px-4 sm:-mt-[140px] sm:px-6 lg:-mt-[214px] lg:px-8">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-4">
             {countries.map((c) => (
               <li
                 key={c.title}
-                className="flex w-full max-w-[250px] justify-self-center flex-col overflow-hidden rounded-[15px] border border-[#e5e7eb] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                className="flex w-full max-w-full justify-self-center flex-col overflow-hidden rounded-[15px] border border-[#e5e7eb] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
               >
                 <div className="p-3">
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[10px]">

@@ -40,13 +40,15 @@ export function PrimaryButton({
   children,
   joinUrl,
   variant = 'primary',
+  onClick,
 }: {
   children: React.ReactNode
   joinUrl: string
   variant?: ButtonVariant
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>
 }) {
   return (
-    <a href={joinUrl} className={`ikh-button ikh-button--${variant}`}>
+    <a href={joinUrl} className={`ikh-button ikh-button--${variant}`} onClick={onClick}>
       <ArrowIcon />
       <span>{children}</span>
     </a>

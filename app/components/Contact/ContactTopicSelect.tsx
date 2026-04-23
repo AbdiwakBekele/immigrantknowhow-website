@@ -60,8 +60,8 @@ export default function ContactTopicSelect({
         type="button"
         className={
           open
-            ? "relative z-10 w-full cursor-pointer rounded-full border-2 border-[#0f62fd] bg-white py-3.5 pl-5 pr-12 text-left text-[16px] text-[#111] outline-none"
-            : "relative w-full cursor-pointer rounded-full border border-[#d1d5db] bg-white py-3.5 pl-5 pr-12 text-left text-[16px] outline-none transition-shadow focus:border-[#0f62fd] focus:ring-2 focus:ring-[#0f62fd]/25"
+            ? "relative z-10 h-11 w-full cursor-pointer rounded-full border-2 border-[#0f62fd] bg-white py-2.5 pl-4 pr-11 text-left text-[16px] text-[#111] outline-none"
+            : "relative h-11 w-full cursor-pointer rounded-full border border-[#b8b8b8] bg-white py-2.5 pl-4 pr-11 text-left text-[16px] outline-none transition-shadow focus:border-[#0f62fd] focus:ring-2 focus:ring-[#0f62fd]/20"
         }
         aria-expanded={open}
         aria-haspopup="listbox"
@@ -69,7 +69,7 @@ export default function ContactTopicSelect({
         aria-label="Topic: choose what you would like to chat about"
         onClick={() => setOpen((o) => !o)}
       >
-        <span className={value ? "text-[#111]" : "text-[#4b5563]"}>
+        <span className={value ? "text-[#111]" : "text-[#6b7280]"}>
           {displayText}
         </span>
         <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#9ca3af]">
@@ -77,7 +77,7 @@ export default function ContactTopicSelect({
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className={open ? "h-5 w-5 -rotate-180" : "h-5 w-5"}
+            className={open ? "h-4 w-4 -rotate-180" : "h-4 w-4"}
             aria-hidden
           >
             <path
@@ -93,7 +93,7 @@ export default function ContactTopicSelect({
         <ul
           id={listId}
           role="listbox"
-          className="-mt-px max-h-[min(20rem,70vh)] w-full list-none overflow-y-auto overflow-x-hidden rounded-none border border-t-0 border-[#6b7280] bg-white py-0 shadow-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="absolute left-0 top-[calc(100%-1px)] z-30 max-h-[min(20rem,70vh)] w-full list-none overflow-y-auto overflow-x-hidden rounded-b-2xl border border-t-0 border-[#6b7280] bg-white py-0 shadow-[0_10px_24px_rgba(0,0,0,0.08)] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           aria-label="Chat topic"
         >
           <li
