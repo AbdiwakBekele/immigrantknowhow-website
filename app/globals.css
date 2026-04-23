@@ -438,14 +438,17 @@ summary {
 
 .ikh-hero__copy {
   position: relative;
+  top: 50px !important;
   z-index: 2;
   flex: 0 0 60%;
   min-width: 0;
+  transform: none !important;
 }
 
 .ikh-hero__kicker {
   position: relative;
-  top: -50px;
+  top: 0;
+  transform: translateY(-35px);
   margin: 0 0 2px;
   color: #fff;
   font-size: 30px;
@@ -458,7 +461,7 @@ summary {
   z-index: 1;
   margin: -33px -170px -15px -10px;
   color: #fff;
-  font-size: 120px;
+  font-size: 130px;
   font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
@@ -507,7 +510,8 @@ summary {
 .ikh-hero__image {
   width: 590px;
   max-width: none;
-  margin: -110px -100px -140px -20px;
+  margin: -95px -100px -140px 30px;
+  transform: translateY(35px) !important;
 }
 
 .ikh-hero__image--cutout {
@@ -1090,6 +1094,7 @@ summary {
   font-size: 28px;
   font-weight: 800;
   line-height: 1.2;
+  text-align: center;
 }
 
 .ikh-service-card p {

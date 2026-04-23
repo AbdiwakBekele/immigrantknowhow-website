@@ -12,19 +12,19 @@ const bulletPoints = [
 
 export default function TurningLonelinessConnection() {
   return (
-    <section className="relative overflow-hidden bg-white text-[#111] sm:min-h-155 lg:min-h-170">
+    <section className="relative h-[520px] overflow-hidden bg-white text-[#111] sm:h-[600px] lg:h-[680px]">
       <div
         className="pointer-events-none absolute inset-0 bg-no-repeat"
         style={{
           backgroundImage: "url('/We-Minimax-risk-of-chronic-loneliness.webp')",
-          backgroundPosition: "100% 70%",
+          backgroundPosition: "100% calc(100% + 225px)",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "100% auto",
+          backgroundSize: "calc(100% + 50px) auto",
         }}
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-292.5 px-4 py-10 sm:px-6 sm:py-20 lg:px-10 lg:py-24 xl:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-292.5 px-4 py-[23px] sm:px-6 sm:py-[46px] lg:px-10 lg:py-[56px] xl:px-12">
         <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-16">
           {/* Left: headline, copy, CTA — fixed reading width like comp */}
           <div className="w-full max-w-135 lg:max-w-88">

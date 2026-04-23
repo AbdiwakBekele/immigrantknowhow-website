@@ -28,8 +28,8 @@ export default function MemberCTABlock({
         href="#"
         className={
           centered
-            ? "inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-6 py-3 text-[20px] font-normal text-white"
-            : "mt-8 inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-6 py-3 text-[20px] font-normal text-white"
+            ? "inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-6 py-3 text-[20px] font-normal text-white !text-white"
+            : "mt-8 inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-6 py-3 text-[20px] font-normal text-white !text-white"
         }
       >
         <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />

@@ -32,7 +32,7 @@ export default function CountriesWeServe() {
   return (
     <section className="text-[#111] mt-15">
       {/* Top Banner */}
-      <div className="relative bg-[#1a1a1a] py-16 lg:py-20">
+      <div className="relative bg-[#1a1a1a] py-[59px] lg:py-[75px]">
         {/* Background */}
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.42] z-0"
@@ -43,13 +43,13 @@ export default function CountriesWeServe() {
         <div className="relative mx-auto max-w-292.5 px-6 lg:px-8">
           <div className="grid items-start gap-10 lg:grid-cols-3 lg:gap-14 xl:gap-16">
             {/* Left Image (TOP layer) */}
-            <div className="relative z-30 mx-auto w-full max-w-xl lg:mx-0 col-span-1 -mt-16 lg:-mt-32">
+            <div className="relative z-0 mx-auto w-full max-w-xl lg:mx-0 lg:w-[466px] lg:max-w-none col-span-1 -mt-8 lg:-mt-12">
               <Image
                 src="/Immigration-services-by-following-Countries-we-serve-image.webp"
                 alt="Family with luggage ready to build a new life abroad"
                 width={666}
                 height={1024}
-                className="w-full max-h-[600px] object-cover object-bottom"
+                className="w-full max-h-[525px] object-contain object-bottom lg:scale-[1.46] lg:origin-bottom-left lg:-translate-x-[170px] lg:translate-y-[148px]"
               />
             </div>
 
@@ -60,12 +60,12 @@ export default function CountriesWeServe() {
                 <span className="text-[#5eb0ff]">Countries</span>
               </h2>
 
-              <p className="mt-4 text-[16px] font-medium leading-snug text-white/95 sm:text-[17px] lg:text-[18px]">
+              <p className="mt-4 text-[18px] font-medium leading-snug text-white/95 sm:text-[19px] lg:text-[20px]">
                 Tailored services and community support for every region we
                 serve.
               </p>
 
-              <p className="mt-5 text-[15px] leading-relaxed text-white/80 sm:text-[16px] lg:max-w-[520px]">
+              <p className="mt-5 text-[17px] leading-relaxed text-white/80 sm:text-[18px] lg:max-w-[520px]">
                 Your journey is different depending on where you land.
                 That&apos;s why Immigrant Knowhow offers dedicated spaces for
                 each region, with services, community, and expert support
@@ -74,7 +74,7 @@ export default function CountriesWeServe() {
 
               <div className="mt-8 flex items-center gap-3">
                 <span className="inline-block h-9 w-1 shrink-0 rounded-full bg-[#2b6bf3]" />
-                <p className="text-[15px] font-semibold tracking-tight text-white sm:text-[16px]">
+                <p className="text-[20px] font-semibold tracking-tight text-white sm:text-[21px]">
                   Choose your country to begin.
                 </p>
               </div>
@@ -85,21 +85,23 @@ export default function CountriesWeServe() {
 
       {/* Cards Section */}
       <div className="bg-white">
-        <div className="relative z-20 mx-auto -mt-28 max-w-292.5 px-6 sm:-mt-32 lg:-mt-36 lg:px-8">
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative z-30 mx-auto -mt-[182px] max-w-292.5 px-6 sm:-mt-[198px] lg:-mt-[214px] lg:px-8">
+          <ul className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
             {countries.map((c) => (
               <li
                 key={c.title}
-                className="flex flex-col overflow-hidden rounded-[15px] border border-[#e5e7eb] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                className="flex w-full max-w-[250px] justify-self-center flex-col overflow-hidden rounded-[15px] border border-[#e5e7eb] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  <Image
-                    src={c.image}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-                  />
+                <div className="p-3">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[10px]">
+                    <Image
+                      src={c.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-1 flex-col px-4 py-5 text-center sm:px-5">
