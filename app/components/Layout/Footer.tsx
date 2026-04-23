@@ -19,7 +19,6 @@ import {
 
 const quickLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
-  { label: "Community", href: "#" },
   { label: "Services", href: "#" },
   { label: "Blog", href: "#" },
   { label: "Contact", href: "/contact" },

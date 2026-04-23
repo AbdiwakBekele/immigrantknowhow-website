@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const navItems = [
-  { label: "Community", href: "#" },
   { label: "Services", href: "#" },
 ];
 
