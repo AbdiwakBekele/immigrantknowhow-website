@@ -273,7 +273,6 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
           <span>© Immigrant Knowhow</span>
           <a href="https://immigrantknowhow.com/privacy-policy/">Terms</a>
           <a href="https://immigrantknowhow.com/privacy-policy/">Privacy</a>
-          <a href="https://www.jeremymcgilvrey.com/">Web Design Company</a>
         </div>
       </footer>
     </main>
