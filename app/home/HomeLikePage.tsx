@@ -1,10 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 
+import BuildRealLife from '@/app/components/Home/BuildRealLife'
+import CountriesWeServe from '@/app/components/Home/CountriesWeServe'
+import ProblemVsMember from '@/app/components/Home/ProblemVsMember'
+import TurningLonelinessConnection from '@/app/components/Home/TurningLonelinessConnection'
+import WelcomeSection from '@/app/components/Home/WelcomeSection'
+import WhyImmigrantsTrust from '@/app/components/Home/WhyImmigrantsTrust'
+import WhyWeBuiltImmigrantKnowhow from '@/app/components/Home/WhyWeBuiltImmigrantKnowhow'
+import HomeHeader from './shared/HomeHeader'
 import { faqs, heroChecklist, howItWorks, joinUrl, services, testimonialCards, thriveCards } from './shared/data'
 import { CountryPageConfig } from './shared/country-pages'
 import CountryHeroSection from './shared/CountryHeroSection'
-import CountryNavDropdown from './shared/CountryNavDropdown'
 import {
   CountryCompareSection,
   CountryHighlightsSection,
@@ -13,11 +20,10 @@ import {
   ForumsConnectionSection,
   HowItWorksSection,
   ResourcesConnectionsSection,
-  LonelinessConnectionSection,
   TestimonialsSection,
   WelcomeCommunitySection,
 } from './shared/shared-sections'
-import { CheckIcon, PrimaryButton, SectionActions } from './shared/ui'
+import { CheckIcon, PrimaryButton, SectionActions, TrustNote } from './shared/ui'
 
 const asset = (path: string) => `/images/home/${path}`
 
@@ -32,37 +38,13 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
     ? (config.forumsLabel ??
         (config.pageTitle === 'United States' ? 'the United States' : config.pageTitle))
     : null
-  const lonelinessConnectRegion = !isCountryPage
-    ? 'Europe'
-    : config.pageTitle === 'United States'
-      ? 'the United States'
-      : config.pageTitle
   const servicesSubtitle = isCountryPage
     ? `Practical help, trusted providers, and real support across ${servicesCountryName} communities.`
     : 'Real help. Trusted people. Right when you need them.'
 
   return (
     <main className="ikh-page">
-      <header className="ikh-header">
-        <div className="ikh-shell ikh-header__inner">
-          <Link href="/" className="ikh-logo-link" aria-label="Immigrant Knowhow home">
-            <img src={asset('2024/05/ImmigrantsKnowHow-Logo.svg')} alt="ImmigrantsKnowHow Logo" className="ikh-logo" />
-          </Link>
-
-          <nav className="ikh-nav" aria-label="Primary navigation">
-            <a href="#services">Services</a>
-            <CountryNavDropdown />
-            <a href="#contact">Contact</a>
-          </nav>
-
-          <PrimaryButton joinUrl={joinUrl}>Become A Member</PrimaryButton>
-          <button className="ikh-menu" aria-label="Menu" type="button">
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-      </header>
+      <HomeHeader joinUrl={joinUrl} logoSrc={asset('2024/05/ImmigrantsKnowHow-Logo.svg')} />
 
       {isCountryPage ? (
         <CountryHeroSection config={config} joinUrl={joinUrl} />
@@ -96,7 +78,7 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
                 <PrimaryButton joinUrl={joinUrl}>Become A Member</PrimaryButton>
               </div>
 
-              <SectionActions joinUrl={joinUrl} light />
+              <TrustNote light />
             </div>
 
             <div className="ikh-hero__media" aria-hidden="true">
@@ -150,6 +132,10 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
         </section>
       ) : null}
 
+      {!isCountryPage ? <WelcomeSection /> : null}
+
+      {!isCountryPage ? <ProblemVsMember /> : null}
+
       {isCountryPage ? <WelcomeCommunitySection welcomeImage="/Welcome-to-Immigrant-TabMob.webp" /> : null}
 
       {isCountryPage ? <CountryCompareSection countryName={config.pageTitle} /> : null}
@@ -192,6 +178,10 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
         </div>
       </section>
 
+      {!isCountryPage ? <CountriesWeServe /> : null}
+
+      {!isCountryPage ? <BuildRealLife /> : null}
+
       {isCountryPage ? <CountryHighlightsSection countryName={config.pageTitle} /> : null}
 
       {resourcesLabel ? (
@@ -200,7 +190,12 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
 
       {forumsLabel ? <ForumsConnectionSection forumsLabel={forumsLabel} /> : null}
 
-      <LonelinessConnectionSection connectRegion={lonelinessConnectRegion} />
+      {!isCountryPage ? <TurningLonelinessConnection /> : null}
+      {isCountryPage ? <TurningLonelinessConnection /> : null}
+
+      {!isCountryPage ? <WhyWeBuiltImmigrantKnowhow /> : null}
+
+      {!isCountryPage ? <WhyImmigrantsTrust /> : null}
 
       <TestimonialsSection testimonialCards={testimonialCards} joinUrl={joinUrl} />
       <FaqSection faqs={faqs} />

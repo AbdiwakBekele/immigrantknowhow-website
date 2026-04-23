@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 type Testimonial = {
   author: string
@@ -32,8 +32,33 @@ const splitQuote = (quote: string) => {
 }
 
 export default function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
-  const pages = useMemo(() => chunk(testimonials, 3), [testimonials])
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const [itemsPerPage, setItemsPerPage] = useState(3)
+  const pages = useMemo(() => chunk(testimonials, itemsPerPage), [testimonials, itemsPerPage])
   const [activePage, setActivePage] = useState(0)
+  const currentPage = pages.length > 0 ? activePage % pages.length : 0
+
+  useEffect(() => {
+    const updateItemsPerPage = (width: number) => {
+      setItemsPerPage(width < 680 ? 1 : 3)
+    }
+
+    if (!carouselRef.current) {
+      return
+    }
+
+    updateItemsPerPage(carouselRef.current.clientWidth)
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        updateItemsPerPage(entry.contentRect.width)
+      }
+    })
+
+    observer.observe(carouselRef.current)
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     if (pages.length <= 1) {
@@ -57,10 +82,12 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
 
   return (
     <div
+      ref={carouselRef}
       className="ikh-testimonial-carousel"
       role="region"
       aria-label="Member testimonials"
       aria-roledescription="carousel"
+      data-items-per-page={itemsPerPage}
     >
       <button
         className="ikh-testimonial-arrow ikh-testimonial-arrow--prev"
@@ -76,13 +103,13 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
       <div className="ikh-testimonial-viewport">
         <div
           className="ikh-testimonial-track"
-          style={{ transform: `translateX(-${activePage * 100}%)` }}
+          style={{ transform: `translateX(-${currentPage * 100}%)` }}
         >
           {pages.map((page, pageIndex) => (
             <div
               className="ikh-testimonial-page"
               key={`testimonial-page-${pageIndex}`}
-              aria-hidden={pageIndex !== activePage}
+              aria-hidden={pageIndex !== currentPage}
             >
               {page.map((item) => {
                 const quote = splitQuote(item.quote)
@@ -123,7 +150,7 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
             type="button"
             key={`testimonial-dot-${pageIndex}`}
             aria-label={`Show testimonial page ${pageIndex + 1}`}
-            aria-current={pageIndex === activePage}
+            aria-current={pageIndex === currentPage}
             onClick={() => setActivePage(pageIndex)}
           />
         ))}

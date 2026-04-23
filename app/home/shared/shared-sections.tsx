@@ -327,7 +327,7 @@ export function CountryHighlightsSection({ countryName }: { countryName: string 
           <img src="/Welcome-to-Immigrant-TabMob.webp" alt="" />
         </div>
 
-        <div className="ikh-country-highlights__content">
+        <div className="ikh-country-highlights__content ikh-country-highlights__content--mobile-tight">
           <h2>
             Making Life in {headingCountry} <span className="secondary">Easier</span>
           </h2>
