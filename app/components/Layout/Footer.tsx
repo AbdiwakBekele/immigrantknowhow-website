@@ -148,10 +148,10 @@ export default function Footer() {
         <div className="mt-20 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-8 text-[16px] text-[#555]">
             <p>© Immigrant Knowhow</p>
-            <Link href="#" className="hover:text-black transition-colors">
+            <Link href="/terms" className="hover:text-black transition-colors">
               Terms
             </Link>
-            <Link href="#" className="hover:text-black transition-colors">
+            <Link href="/terms" className="hover:text-black transition-colors">
               Privacy
             </Link>
           </div>
