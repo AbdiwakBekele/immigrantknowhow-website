@@ -11,10 +11,12 @@ function ShieldIcon() {
 
 type MemberCTABlockProps = {
   align?: "start" | "center";
+  showTrustText?: boolean;
 };
 
 export default function MemberCTABlock({
   align = "start",
+  showTrustText = true,
 }: MemberCTABlockProps) {
   const centered = align === "center";
 
@@ -36,20 +38,22 @@ export default function MemberCTABlock({
         Become A Member
       </Link>
 
-      <p
-        className={
-          centered
-            ? "mt-5 flex max-w-md items-start justify-center gap-2 text-[14px] leading-tight text-[#111]"
-            : "mt-5 flex items-start gap-2 text-[14px] leading-tight text-[#111]"
-        }
-      >
-        <ShieldIcon />
-        <span className={centered ? "text-left" : undefined}>
-          Trusted by over <b>10,000+</b> immigrants
-          <br />
-          in the U.S., Canada, and Europe
-        </span>
-      </p>
+      {showTrustText && (
+        <p
+          className={
+            centered
+              ? "mt-5 flex max-w-md items-start justify-center gap-2 text-[14px] leading-tight text-[#111]"
+              : "mt-5 flex items-start gap-2 text-[14px] leading-tight text-[#111]"
+          }
+        >
+          <ShieldIcon />
+          <span className={centered ? "text-left" : undefined}>
+            Trusted by over <b>10,000+</b> immigrants
+            <br />
+            in the U.S., Canada, and Europe
+          </span>
+        </p>
+      )}
     </div>
   );
 }
