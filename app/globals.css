@@ -2073,10 +2073,6 @@ summary {
   line-height: 1.5;
 }
 
-.ikh-footer__bottom a:last-child {
-  margin-left: auto;
-}
-
 .ikh-mobile-only {
   display: none;
 }
@@ -2901,10 +2897,6 @@ summary {
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-  }
-
-  .ikh-footer__bottom a:last-child {
-    margin-left: 0;
   }
 }
 

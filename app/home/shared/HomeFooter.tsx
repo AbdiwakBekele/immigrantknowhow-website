@@ -79,8 +79,8 @@ export default function HomeFooter() {
 
       <div className="ikh-shell ikh-footer__bottom">
         <span>© Immigrant Knowhow</span>
-        <a href="https://immigrantknowhow.com/privacy-policy/">Terms</a>
-        <a href="https://immigrantknowhow.com/privacy-policy/">Privacy</a>
+        <Link href="/terms">Terms</Link>
+        <Link href="/terms">Privacy</Link>
       </div>
     </footer>
   );

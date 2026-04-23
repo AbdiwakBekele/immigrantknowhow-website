@@ -271,8 +271,8 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
 
         <div className="ikh-shell ikh-footer__bottom">
           <span>© Immigrant Knowhow</span>
-          <a href="https://immigrantknowhow.com/privacy-policy/">Terms</a>
-          <a href="https://immigrantknowhow.com/privacy-policy/">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/terms">Privacy</a>
         </div>
       </footer>
     </main>
