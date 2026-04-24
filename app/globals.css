@@ -3222,3 +3222,11 @@ summary {
     stroke: #fff !important;
   }
 }
+.gtranslate_wrapper {
+  z-index: 99999 !important;
+}
+
+.gt_float_switcher {
+  margin-right: 16px !important;
+  margin-bottom: 16px !important;
+}

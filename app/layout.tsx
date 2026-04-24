@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import GTranslateWidget from '@/components/GTranslateWidget';
 
 export const metadata: Metadata = {
   title: "Home - Immigrants KnowHow",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">{children}
+        <GTranslateWidget />
+      </body>
     </html>
   );
 }
