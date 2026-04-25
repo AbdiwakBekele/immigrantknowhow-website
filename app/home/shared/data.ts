@@ -1,6 +1,6 @@
 const asset = (path: string) => `/images/home/${path}`
 
-export const joinUrl = 'https://immigrantknowhow.com/join-now/'
+export const joinUrl = 'https://hub.immigrantknowhow.com/register'
 
 export const heroChecklist = [
   { label: 'Tour Guides:', text: 'Discover your new home with local experts' },

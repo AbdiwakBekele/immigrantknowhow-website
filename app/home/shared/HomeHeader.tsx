@@ -5,7 +5,11 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import CountryNavDropdown from './CountryNavDropdown'
+import ResourceNavDropdown from './ResourceNavDropdown'
 import { PrimaryButton } from './ui'
+
+const signInUrl = 'https://hub.immigrantknowhow.com/login'
+const becomeMemberUrl = 'https://hub.immigrantknowhow.com/register'
 
 export default function HomeHeader({
   joinUrl,
@@ -29,10 +33,15 @@ export default function HomeHeader({
           <nav className="ikh-nav" aria-label="Primary navigation">
             <a href="#services">Services</a>
             <CountryNavDropdown />
+            <ResourceNavDropdown />
+            <a href="https://immigrantknowhow.com/community">Community</a>
             <Link href="/contact">Contact</Link>
+            <a href={signInUrl}>Sign In</a>
           </nav>
 
-          <PrimaryButton joinUrl={joinUrl}>Become A Member</PrimaryButton>
+          <PrimaryButton joinUrl={becomeMemberUrl} className="ikh-button--header">
+            Become A Member
+          </PrimaryButton>
           <button
             className="ikh-menu"
             aria-label="Menu"
@@ -58,10 +67,17 @@ export default function HomeHeader({
             Services
           </a>
           <CountryNavDropdown />
+          <ResourceNavDropdown />
+          <a href="https://immigrantknowhow.com/community" onClick={closeMobileNav}>
+            Community
+          </a>
           <Link href="/contact" onClick={closeMobileNav}>
             Contact
           </Link>
-          <PrimaryButton joinUrl={joinUrl} onClick={closeMobileNav}>
+          <a href={signInUrl} onClick={closeMobileNav}>
+            Sign In
+          </a>
+          <PrimaryButton joinUrl={becomeMemberUrl} onClick={closeMobileNav} className="ikh-button--header">
             Become A Member
           </PrimaryButton>
         </div>
