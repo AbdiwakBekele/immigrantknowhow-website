@@ -1,33 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "GigaSans";
-  font-style: normal;
-  font-weight: 400;
-  font-display: auto;
-  src:
-    url("/fonts/gigasans/GigaSans-Regular.woff2") format("woff2"),
-    url("/fonts/gigasans/GigaSans-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "GigaSans";
-  font-style: normal;
-  font-weight: 700;
-  font-display: auto;
-  src: url("/fonts/gigasans/GigaSans-Bold.woff") format("woff");
-}
-
-@font-face {
-  font-family: "GigaSans";
-  font-style: normal;
-  font-weight: 800;
-  font-display: auto;
-  src:
-    url("/fonts/gigasans/GigaSansExtraBold.woff2") format("woff2"),
-    url("/fonts/gigasans/GigaSansExtraBold.woff") format("woff");
-}
-
 :root {
   --ikh-blue: #0f62fd;
   --ikh-black: #000000;
@@ -175,6 +147,11 @@ summary {
 }
 
 .ikh-nav-dropdown.is-open .ikh-nav-dropdown__menu {
+  display: block;
+}
+
+.ikh-nav-dropdown:hover .ikh-nav-dropdown__menu,
+.ikh-nav-dropdown:focus-within .ikh-nav-dropdown__menu {
   display: block;
 }
 
@@ -2463,8 +2440,20 @@ summary {
   }
 
   .ikh-mobile-nav__inner .ikh-nav-dropdown__menu {
-    right: 0;
+    position: static;
+    display: block;
     min-width: 100%;
+    transform: none;
+    margin-top: 4px;
+    border: 0;
+    box-shadow: none;
+    padding: 0 0 0 10px;
+    background: transparent;
+  }
+
+  .ikh-mobile-nav__inner .ikh-nav-dropdown__menu a {
+    padding: 6px 0;
+    font-size: 15px;
   }
 
   .ikh-mobile-nav__inner .ikh-button {
