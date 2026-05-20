@@ -4,6 +4,7 @@ import {
   faCircleArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
+import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
 
 function ShieldIcon() {
   return <FontAwesomeIcon icon={faShieldHalved} className="h-5 w-5 shrink-0" />;
@@ -27,7 +28,7 @@ export default function MemberCTABlock({
       }
     >
       <Link
-        href="#"
+        href={HUB_REGISTER_URL}
         className={
           centered
             ? "inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-6 py-3 text-[20px] font-normal text-white !text-white"
@@ -35,7 +36,7 @@ export default function MemberCTABlock({
         }
       >
         <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-        Become A Member
+        Join Now!
       </Link>
 
       {showTrustText && (

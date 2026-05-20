@@ -1,6 +1,9 @@
+import { HUB_LOGIN_URL, HUB_REGISTER_URL } from '@/app/lib/hub-links'
+
 const asset = (path: string) => `/images/home/${path}`
 
-export const joinUrl = 'https://immigrantknowhow.com/join-now/'
+export const loginUrl = HUB_LOGIN_URL
+export const joinUrl = HUB_REGISTER_URL
 
 export const heroChecklist = [
   { label: 'Tour Guides:', text: 'Discover your new home with local experts' },

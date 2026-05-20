@@ -9,9 +9,11 @@ import { PrimaryButton } from './ui'
 
 export default function HomeHeader({
   joinUrl,
+  loginUrl,
   logoSrc,
 }: {
   joinUrl: string
+  loginUrl: string
   logoSrc: string
 }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
@@ -32,7 +34,19 @@ export default function HomeHeader({
             <Link href="/contact">Contact</Link>
           </nav>
 
-          <PrimaryButton joinUrl={joinUrl}>Become A Member</PrimaryButton>
+          <div className="ikh-header-actions">
+            <a
+              href={loginUrl}
+              className="ikh-button ikh-button--outline"
+            >
+              Sign-in
+            </a>
+
+            <PrimaryButton joinUrl={joinUrl}>
+              Join Now!
+            </PrimaryButton>
+          </div>
+
           <button
             className="ikh-menu"
             aria-label="Menu"
@@ -57,12 +71,26 @@ export default function HomeHeader({
           <a href="#services" onClick={closeMobileNav}>
             Services
           </a>
+
           <CountryNavDropdown />
+
           <Link href="/contact" onClick={closeMobileNav}>
             Contact
           </Link>
-          <PrimaryButton joinUrl={joinUrl} onClick={closeMobileNav}>
-            Become A Member
+
+          <a
+            href={loginUrl}
+            onClick={closeMobileNav}
+            className="ikh-button ikh-button--outline"
+          >
+            Login
+          </a>
+
+          <PrimaryButton
+            joinUrl={joinUrl}
+            onClick={closeMobileNav}
+          >
+            Join Now!
           </PrimaryButton>
         </div>
       </nav>
