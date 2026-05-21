@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { HUB_LOGIN_URL, HUB_REGISTER_URL } from "@/app/lib/hub-links";
+import {
+  HUB_LOGIN_URL,
+  HUB_REGISTER_URL,
+  MEMBER_CTA_LABEL,
+} from "@/app/lib/hub-links";
 
 const navItems = [
   { label: "Services", href: "#" },
@@ -205,7 +209,7 @@ export default function Header() {
                 strokeLinecap="round"
               />
             </svg>
-            Join Now!
+            {MEMBER_CTA_LABEL}
           </Link>
         </div>
       </div>
@@ -266,7 +270,7 @@ export default function Header() {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-2.5 text-base font-normal text-white transition-all duration-200 hover:bg-[#0f62fd]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Join Now!
+                {MEMBER_CTA_LABEL}
               </Link>
             </div>
           </nav>

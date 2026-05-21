@@ -5,7 +5,7 @@ import {
   faCircleArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
-import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
+import { HUB_REGISTER_URL, MEMBER_CTA_LABEL } from "@/app/lib/hub-links";
 
 const steps = [
   {
@@ -91,7 +91,7 @@ export default function HowItWorks() {
   hover:translate-y-0 hover:bg-[#0f62fd] hover:shadow-none"
           >
             <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-            Join Now!
+            {MEMBER_CTA_LABEL}
           </Link>
           <div className="flex items-start gap-2 text-[14px] text-gray-900">
             <ShieldIcon />

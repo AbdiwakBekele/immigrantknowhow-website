@@ -6,7 +6,7 @@ import {
   faCircleCheck,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
-import { HUB_LOGIN_URL, HUB_REGISTER_URL } from "@/app/lib/hub-links";
+import { HUB_LOGIN_URL, HUB_REGISTER_URL, MEMBER_CTA_LABEL } from "@/app/lib/hub-links";
 
 const features = [
   { title: "Tour Guides", text: "Discover your new home with local experts" },
@@ -80,7 +80,7 @@ export default function Hero() {
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-3 text-[16px] font-normal text-white transition hover:bg-[#0056e0] sm:px-6 sm:text-[18px] lg:text-[20px]"
           >
             <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-            Join Now!
+            {MEMBER_CTA_LABEL}
           </Link>
         </div>
 

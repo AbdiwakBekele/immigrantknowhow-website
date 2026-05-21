@@ -5,7 +5,7 @@ import {
   faCircleArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
-import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
+import { HUB_REGISTER_URL, MEMBER_CTA_LABEL } from "@/app/lib/hub-links";
 
 const BRAND_BLUE = "#1D61E7";
 
@@ -73,7 +73,7 @@ export default function SupportMovesCTA() {
                   icon={faCircleArrowRight}
                   className="h-6 w-6 shrink-0"
                 />
-                Join Now!
+                {MEMBER_CTA_LABEL}
               </Link>
               <p className="mt-6 flex max-w-sm items-start gap-2 self-end text-left text-[13px] leading-snug text-white/85 sm:text-[14px]">
                 <FontAwesomeIcon
