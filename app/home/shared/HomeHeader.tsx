@@ -4,12 +4,12 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
+import { MEMBER_CTA_LABEL } from '@/app/lib/hub-links'
+import { COMMUNITY_PAGE_PATH } from '@/app/lib/site-links'
+
 import CountryNavDropdown from './CountryNavDropdown'
 import ResourceNavDropdown from './ResourceNavDropdown'
 import { PrimaryButton } from './ui'
-
-const signInUrl = 'https://hub.immigrantknowhow.com/login'
-const becomeMemberUrl = 'https://hub.immigrantknowhow.com/register'
 
 export default function HomeHeader({
   joinUrl,
@@ -36,9 +36,8 @@ export default function HomeHeader({
             <a href="#services">Services</a>
             <CountryNavDropdown />
             <ResourceNavDropdown />
-            <a href="https://immigrantknowhow.com/community">Community</a>
+            <a href={COMMUNITY_PAGE_PATH}>Community</a>
             <Link href="/contact">Contact</Link>
-            <a href={signInUrl}>Sign In</a>
           </nav>
 
           <div className="ikh-header-actions">
@@ -49,9 +48,7 @@ export default function HomeHeader({
               Sign-in
             </a>
 
-            <PrimaryButton joinUrl={joinUrl}>
-              Join Now!
-            </PrimaryButton>
+            <PrimaryButton joinUrl={joinUrl}>{MEMBER_CTA_LABEL}</PrimaryButton>
           </div>
 
           <button
@@ -81,6 +78,12 @@ export default function HomeHeader({
 
           <CountryNavDropdown />
 
+          <ResourceNavDropdown />
+
+          <a href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
+            Community
+          </a>
+
           <Link href="/contact" onClick={closeMobileNav}>
             Contact
           </Link>
@@ -93,11 +96,8 @@ export default function HomeHeader({
             Login
           </a>
 
-          <PrimaryButton
-            joinUrl={joinUrl}
-            onClick={closeMobileNav}
-          >
-            Join Now!
+          <PrimaryButton joinUrl={joinUrl} onClick={closeMobileNav}>
+            {MEMBER_CTA_LABEL}
           </PrimaryButton>
         </div>
       </nav>

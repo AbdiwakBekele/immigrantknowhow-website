@@ -1,9 +1,12 @@
-import { HUB_LOGIN_URL, HUB_REGISTER_URL } from '@/app/lib/hub-links'
+import { HUB_LOGIN_URL, HUB_REGISTER_URL, MEMBER_CTA_LABEL } from '@/app/lib/hub-links'
+import { COMMUNITY_PAGE_PATH } from '@/app/lib/site-links'
 
 const asset = (path: string) => `/images/home/${path}`
 
 export const loginUrl = HUB_LOGIN_URL
 export const joinUrl = HUB_REGISTER_URL
+export const communityUrl = COMMUNITY_PAGE_PATH
+export const memberCtaLabel = MEMBER_CTA_LABEL
 
 export const heroChecklist = [
   { label: 'Tour Guides:', text: 'Discover your new home with local experts' },

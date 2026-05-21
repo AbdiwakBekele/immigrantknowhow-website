@@ -1,11 +1,12 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
+import { DV_LOTTERY_PAGE_PATH, LIBRARY_PAGE_PATH } from '@/app/lib/site-links'
+
 const resourceLinks = [
-  { label: 'Library', href: 'https://hub.immigrantknowhow.com/register' },
-  { label: 'DV Lottery', href: '#' },
+  { label: 'Library', href: LIBRARY_PAGE_PATH },
+  { label: 'DV Lottery', href: DV_LOTTERY_PAGE_PATH },
   { label: 'Articles', href: '#' },
 ]
 
@@ -50,9 +51,14 @@ export default function ResourceNavDropdown() {
       </button>
       <div className="ikh-nav-dropdown__menu" role="menu" aria-label="Resources links">
         {resourceLinks.map((item) => (
-          <Link key={item.label} href={item.href} role="menuitem" onClick={() => setIsOpen(false)}>
+          <a
+            key={item.label}
+            href={item.href}
+            role="menuitem"
+            onClick={() => setIsOpen(false)}
+          >
             {item.label}
-          </Link>
+          </a>
         ))}
       </div>
     </div>

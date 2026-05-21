@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
+import { communityUrl } from "@/app/home/shared/data";
+
 const asset = (path: string) => `/images/home/${path}`;
 
 export default function HomeFooter() {
@@ -23,7 +25,7 @@ export default function HomeFooter() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <a href="https://immigrantknowhow.com/community">Community</a>
+              <a href={communityUrl}>Community</a>
             </li>
             <li>
               <a href="#services">Services</a>

@@ -9,7 +9,18 @@ import WelcomeSection from '@/app/components/Home/WelcomeSection'
 import WhyImmigrantsTrust from '@/app/components/Home/WhyImmigrantsTrust'
 import WhyWeBuiltImmigrantKnowhow from '@/app/components/Home/WhyWeBuiltImmigrantKnowhow'
 import HomeHeader from './shared/HomeHeader'
-import { faqs, heroChecklist, howItWorks, joinUrl, loginUrl, services, testimonialCards, thriveCards } from './shared/data'
+import {
+  communityUrl,
+  faqs,
+  heroChecklist,
+  howItWorks,
+  joinUrl,
+  loginUrl,
+  memberCtaLabel,
+  services,
+  testimonialCards,
+  thriveCards,
+} from './shared/data'
 import { CountryPageConfig } from './shared/country-pages'
 import CountryHeroSection from './shared/CountryHeroSection'
 import {
@@ -79,7 +90,7 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
                 <PrimaryButton joinUrl={loginUrl} variant="outline">
                   Sign-in
                 </PrimaryButton>
-                <PrimaryButton joinUrl={joinUrl}>Join Now!</PrimaryButton>
+                <PrimaryButton joinUrl={joinUrl}>{memberCtaLabel}</PrimaryButton>
               </div>
 
               <TrustNote light />
@@ -221,7 +232,7 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
                 <Link href="/">Home</Link>
               </li>
               <li>
-                <a href="https://immigrantknowhow.com/community">Community</a>
+                <a href={communityUrl}>Community</a>
               </li>
               <li>
                 <a href="#services">Services</a>

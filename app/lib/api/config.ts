@@ -11,4 +11,11 @@ export const apiConfig = {
 
 export const apiEndpoints = {
   publicLibraryItems: `${apiConfig.baseUrl}/api/public/library-items`,
+  publicDvLottery: `${apiConfig.baseUrl}/api/public/dv-lottery`,
+  publicCommunityPosts: `${apiConfig.baseUrl}/api/community/posts`,
+  publicCommunityPost: (id: number) =>
+    `${apiConfig.baseUrl}/api/community/posts/${id}`,
+  publicCommunityComments: (id: number) =>
+    `${apiConfig.baseUrl}/api/community/posts/${id}/comments`,
+  publicCommunityNews: `${apiConfig.baseUrl}/api/community/news`,
 };

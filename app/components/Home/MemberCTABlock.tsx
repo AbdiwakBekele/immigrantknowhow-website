@@ -4,7 +4,7 @@ import {
   faCircleArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
-import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
+import { HUB_REGISTER_URL, MEMBER_CTA_LABEL } from "@/app/lib/hub-links";
 
 function ShieldIcon() {
   return <FontAwesomeIcon icon={faShieldHalved} className="h-5 w-5 shrink-0" />;
@@ -36,7 +36,7 @@ export default function MemberCTABlock({
         }
       >
         <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-        Join Now!
+        {MEMBER_CTA_LABEL}
       </Link>
 
       {showTrustText && (
