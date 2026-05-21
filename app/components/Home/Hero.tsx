@@ -6,6 +6,7 @@ import {
   faCircleCheck,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
+import { HUB_LOGIN_URL, HUB_REGISTER_URL } from "@/app/lib/hub-links";
 
 const features = [
   { title: "Tour Guides", text: "Discover your new home with local experts" },
@@ -66,22 +67,22 @@ export default function Hero() {
           </ul>
 
           <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
-            <Link
-              href="#"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0f62fd] px-5 py-3 text-[16px] font-normal leading-none text-[#0f62fd] transition hover:bg-[#0f62fd] hover:text-white sm:px-6 sm:text-[18px] lg:text-[20px]"
-            >
-              <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-              Register As Provider
-            </Link>
+          <Link
+            href={HUB_LOGIN_URL}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0f62fd] px-5 py-3 text-[16px] font-normal leading-none text-[#0f62fd] transition hover:bg-[#0f62fd] hover:text-white sm:px-6 sm:text-[18px] lg:text-[20px]"
+          >
+            <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
+            Sign-in
+          </Link>
 
-            <Link
-              href="#"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-3 text-[16px] font-normal text-white sm:px-6 sm:text-[18px] lg:text-[20px]"
-            >
-              <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-              Become A Member
-            </Link>
-          </div>
+          <Link
+            href={HUB_REGISTER_URL}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-3 text-[16px] font-normal text-white transition hover:bg-[#0056e0] sm:px-6 sm:text-[18px] lg:text-[20px]"
+          >
+            <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
+            Join Now!
+          </Link>
+        </div>
 
           <p className="mt-5 flex items-start gap-2 text-[14px] leading-tight text-white">
             <ShieldIcon />

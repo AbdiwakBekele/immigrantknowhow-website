@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { HUB_LOGIN_URL, HUB_REGISTER_URL } from "@/app/lib/hub-links";
 
 const navItems = [
   { label: "Services", href: "#" },
@@ -101,7 +102,7 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-[18px]  font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
+              className="text-[18px] font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
             >
               <span className="inline-flex items-center gap-1">
                 {item.label}
@@ -122,7 +123,9 @@ export default function Header() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className={`h-4 w-4 transition-transform ${isCountryOpen ? "rotate-180" : ""}`}
+                className={`h-4 w-4 transition-transform ${
+                  isCountryOpen ? "rotate-180" : ""
+                }`}
                 aria-hidden="true"
               >
                 <path
@@ -155,47 +158,56 @@ export default function Header() {
 
           <Link
             href="/contact"
-            className="text-[18px]  font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
+            className="text-[18px] font-normal text-[#1e1e1e] transition-colors hover:text-[#0f62fd]"
           >
             <span className="inline-flex items-center gap-1">Contact</span>
           </Link>
         </nav>
 
-        <Link
-          href="#"
-          className="hidden md:inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-7.5 py-3 text-[20px] font-normal text-white transition-all duration-200 -translate-y-1 shadow-[0_10px_24px_rgba(15,98,253,0.42)] 
-  hover:translate-y-0 hover:bg-[#0f62fd] hover:shadow-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="h-6 w-6"
-            aria-hidden="true"
+        {/* Desktop Buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href={HUB_LOGIN_URL}
+            className="inline-flex items-center rounded-full border border-[#0f62fd] px-6 py-3 text-[18px] font-normal text-[#0f62fd] transition-all duration-200 hover:bg-[#0f62fd] hover:text-white"
           >
-            <circle
-              cx="12"
-              cy="12"
-              r="9"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            />
-            <path
-              d="M10 8.5 13.5 12 10 15.5"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M8.5 12h5"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-          </svg>
-          Become A Member
-        </Link>
+            Login
+          </Link>
+
+          <Link
+            href={HUB_REGISTER_URL}
+            className="inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-7.5 py-3 text-[20px] font-normal text-white transition-all duration-200 -translate-y-1 shadow-[0_10px_24px_rgba(15,98,253,0.42)] hover:translate-y-0 hover:bg-[#0f62fd] hover:shadow-none"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="h-6 w-6"
+              aria-hidden="true"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+              <path
+                d="M10 8.5 13.5 12 10 15.5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8.5 12h5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+            </svg>
+            Join Now!
+          </Link>
+        </div>
       </div>
 
       {isMobileMenuOpen ? (
@@ -216,7 +228,10 @@ export default function Header() {
               </Link>
             ))}
 
-            <span className="pt-1 text-base font-medium text-[#0f62fd]">Country</span>
+            <span className="pt-1 text-base font-medium text-[#0f62fd]">
+              Country
+            </span>
+
             {countries.map((country) => (
               <Link
                 key={country}
@@ -236,13 +251,24 @@ export default function Header() {
               Contact
             </Link>
 
-            <Link
-              href="#"
-              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-2.5 text-base font-normal text-white transition-all duration-200 hover:bg-[#0f62fd]"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Become A Member
-            </Link>
+            {/* Mobile Buttons */}
+            <div className="mt-3 flex flex-col gap-3">
+              <Link
+                href={HUB_LOGIN_URL}
+                className="inline-flex w-full items-center justify-center rounded-full border border-[#0f62fd] px-5 py-2.5 text-base font-normal text-[#0f62fd] transition-all duration-200 hover:bg-[#0f62fd] hover:text-white"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Login
+              </Link>
+
+              <Link
+                href={HUB_REGISTER_URL}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0f62fd] px-5 py-2.5 text-base font-normal text-white transition-all duration-200 hover:bg-[#0f62fd]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Join Now!
+              </Link>
+            </div>
           </nav>
         </div>
       ) : null}

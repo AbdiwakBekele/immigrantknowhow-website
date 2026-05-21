@@ -1,6 +1,6 @@
 import HomeFooter from "@/app/home/shared/HomeFooter";
 import HomeHeader from "@/app/home/shared/HomeHeader";
-import { joinUrl } from "@/app/home/shared/data";
+import { joinUrl, loginUrl } from "@/app/home/shared/data";
 
 export default function SiteLayout({
   children,
@@ -11,6 +11,7 @@ export default function SiteLayout({
     <>
       <HomeHeader
         joinUrl={joinUrl}
+        loginUrl={loginUrl}
         logoSrc="/images/home/2024/05/ImmigrantsKnowHow-Logo.svg"
       />
       <main>{children}</main>

@@ -5,6 +5,7 @@ import {
   faCircleArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
+import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
 
 const BRAND_BLUE = "#1D61E7";
 
@@ -64,7 +65,7 @@ export default function SupportMovesCTA() {
                 help, and feel part of something bigger.
               </p>
               <Link
-                href="#"
+                href={HUB_REGISTER_URL}
                 className="mt-7 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-[18px] font-semibold text-white shadow-[0_10px_28px_rgba(29,97,231,0.45)] transition-[transform,box-shadow,filter] duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_14px_36px_rgba(29,97,231,0.55)] active:scale-[0.98] sm:mt-8 sm:text-[20px]"
                 style={{ backgroundColor: BRAND_BLUE }}
               >
@@ -72,7 +73,7 @@ export default function SupportMovesCTA() {
                   icon={faCircleArrowRight}
                   className="h-6 w-6 shrink-0"
                 />
-                Become A Member
+                Join Now!
               </Link>
               <p className="mt-6 flex max-w-sm items-start gap-2 self-end text-left text-[13px] leading-snug text-white/85 sm:text-[14px]">
                 <FontAwesomeIcon

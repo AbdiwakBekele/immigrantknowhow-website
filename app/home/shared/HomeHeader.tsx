@@ -13,9 +13,11 @@ const becomeMemberUrl = 'https://hub.immigrantknowhow.com/register'
 
 export default function HomeHeader({
   joinUrl,
+  loginUrl,
   logoSrc,
 }: {
   joinUrl: string
+  loginUrl: string
   logoSrc: string
 }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
@@ -39,9 +41,19 @@ export default function HomeHeader({
             <a href={signInUrl}>Sign In</a>
           </nav>
 
-          <PrimaryButton joinUrl={becomeMemberUrl} className="ikh-button--header">
-            Become A Member
-          </PrimaryButton>
+          <div className="ikh-header-actions">
+            <a
+              href={loginUrl}
+              className="ikh-button ikh-button--outline"
+            >
+              Sign-in
+            </a>
+
+            <PrimaryButton joinUrl={joinUrl}>
+              Join Now!
+            </PrimaryButton>
+          </div>
+
           <button
             className="ikh-menu"
             aria-label="Menu"
@@ -66,19 +78,26 @@ export default function HomeHeader({
           <a href="#services" onClick={closeMobileNav}>
             Services
           </a>
+
           <CountryNavDropdown />
-          <ResourceNavDropdown />
-          <a href="https://immigrantknowhow.com/community" onClick={closeMobileNav}>
-            Community
-          </a>
+
           <Link href="/contact" onClick={closeMobileNav}>
             Contact
           </Link>
-          <a href={signInUrl} onClick={closeMobileNav}>
-            Sign In
+
+          <a
+            href={loginUrl}
+            onClick={closeMobileNav}
+            className="ikh-button ikh-button--outline"
+          >
+            Login
           </a>
-          <PrimaryButton joinUrl={becomeMemberUrl} onClick={closeMobileNav} className="ikh-button--header">
-            Become A Member
+
+          <PrimaryButton
+            joinUrl={joinUrl}
+            onClick={closeMobileNav}
+          >
+            Join Now!
           </PrimaryButton>
         </div>
       </nav>
