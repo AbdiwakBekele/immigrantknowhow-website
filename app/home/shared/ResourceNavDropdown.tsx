@@ -1,11 +1,12 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 const resourceLinks = [
-  { label: 'Library', href: '/library' },
-  { label: 'DV Lottery', href: 'https://hub.immigrantknowhow.com/dv-lottery' },
-  { label: 'Articles', href: 'https://hub.immigrantknowhow.com/articles' },
+  { label: 'Library', href: 'https://hub.immigrantknowhow.com/register' },
+  { label: 'DV Lottery', href: '#' },
+  { label: 'Articles', href: '#' },
 ]
 
 export default function ResourceNavDropdown() {
@@ -49,9 +50,9 @@ export default function ResourceNavDropdown() {
       </button>
       <div className="ikh-nav-dropdown__menu" role="menu" aria-label="Resources links">
         {resourceLinks.map((item) => (
-          <a key={item.label} href={item.href} role="menuitem" onClick={() => setIsOpen(false)}>
+          <Link key={item.label} href={item.href} role="menuitem" onClick={() => setIsOpen(false)}>
             {item.label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
