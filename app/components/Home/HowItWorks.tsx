@@ -5,6 +5,7 @@ import {
   faCircleArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
+import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
 
 const steps = [
   {
@@ -85,12 +86,12 @@ export default function HowItWorks() {
 
         <div className="mt-3 flex flex-col items-center gap-5">
           <Link
-            href="#"
+            href={HUB_REGISTER_URL}
             className="inline-flex items-center gap-2 rounded-full bg-[#0f62fd] px-7.5 py-3 text-[20px] font-normal text-white transition-all duration-200 -translate-y-1 shadow-[0_10px_24px_rgba(15,98,253,0.42)] 
   hover:translate-y-0 hover:bg-[#0f62fd] hover:shadow-none"
           >
             <FontAwesomeIcon icon={faCircleArrowRight} className="h-6 w-6" />
-            Become A Member
+            Join Now!
           </Link>
           <div className="flex items-start gap-2 text-[14px] text-gray-900">
             <ShieldIcon />

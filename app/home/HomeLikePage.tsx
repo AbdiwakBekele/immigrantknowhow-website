@@ -9,7 +9,7 @@ import WelcomeSection from '@/app/components/Home/WelcomeSection'
 import WhyImmigrantsTrust from '@/app/components/Home/WhyImmigrantsTrust'
 import WhyWeBuiltImmigrantKnowhow from '@/app/components/Home/WhyWeBuiltImmigrantKnowhow'
 import HomeHeader from './shared/HomeHeader'
-import { faqs, heroChecklist, howItWorks, joinUrl, services, testimonialCards, thriveCards } from './shared/data'
+import { faqs, heroChecklist, howItWorks, joinUrl, loginUrl, services, testimonialCards, thriveCards } from './shared/data'
 import { CountryPageConfig } from './shared/country-pages'
 import CountryHeroSection from './shared/CountryHeroSection'
 import {
@@ -44,7 +44,11 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
 
   return (
     <main className="ikh-page">
-      <HomeHeader joinUrl={joinUrl} logoSrc={asset('2024/05/ImmigrantsKnowHow-Logo.svg')} />
+      <HomeHeader
+        joinUrl={joinUrl}
+        loginUrl={loginUrl}
+        logoSrc={asset('2024/05/ImmigrantsKnowHow-Logo.svg')}
+      />
 
       {isCountryPage ? (
         <CountryHeroSection config={config} joinUrl={joinUrl} />
@@ -72,10 +76,10 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
               </ul>
 
               <div className="ikh-hero__buttons">
-                <PrimaryButton joinUrl={joinUrl} variant="outline">
-                  Register As Provider
+                <PrimaryButton joinUrl={loginUrl} variant="outline">
+                  Sign-in
                 </PrimaryButton>
-                <PrimaryButton joinUrl={joinUrl}>Become A Member</PrimaryButton>
+                <PrimaryButton joinUrl={joinUrl}>Join Now!</PrimaryButton>
               </div>
 
               <TrustNote light />

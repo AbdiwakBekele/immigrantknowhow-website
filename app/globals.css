@@ -112,6 +112,12 @@ summary {
   color: var(--ikh-blue);
 }
 
+.ikh-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .ikh-nav-dropdown {
   position: relative;
 }
