@@ -5,7 +5,11 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import CountryNavDropdown from './CountryNavDropdown'
+import ResourceNavDropdown from './ResourceNavDropdown'
 import { PrimaryButton } from './ui'
+
+const signInUrl = 'https://hub.immigrantknowhow.com/login'
+const becomeMemberUrl = 'https://hub.immigrantknowhow.com/register'
 
 export default function HomeHeader({
   joinUrl,
@@ -31,7 +35,10 @@ export default function HomeHeader({
           <nav className="ikh-nav" aria-label="Primary navigation">
             <a href="#services">Services</a>
             <CountryNavDropdown />
+            <ResourceNavDropdown />
+            <a href="https://immigrantknowhow.com/community">Community</a>
             <Link href="/contact">Contact</Link>
+            <a href={signInUrl}>Sign In</a>
           </nav>
 
           <div className="ikh-header-actions">
