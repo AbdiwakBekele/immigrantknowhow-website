@@ -29,7 +29,7 @@ const chatTopicOptions = [
 
 export default function ContactPage() {
   return (
-    <>
+    <main className="ikh-site-page ikh-site-page--contact">
       <header className="relative flex min-h-56 w-full items-center justify-center overflow-hidden sm:min-h-64 lg:min-h-72">
         <Image
           src="/Contact-Immigrants-KnowHow.webp"
@@ -46,7 +46,7 @@ export default function ContactPage() {
       </header>
 
       <section className="bg-white py-14 text-[#111] sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
+        <div className="ikh-shell ikh-site-page__inner">
           <div className="text-center">
             <h2 className="text-[36px] font-extrabold leading-tight text-black sm:text-[42px]">
               We&apos;d Love to Hear From You
@@ -172,6 +172,6 @@ export default function ContactPage() {
           </form>
         </div>
       </section>
-    </>
+    </main>
   );
 }

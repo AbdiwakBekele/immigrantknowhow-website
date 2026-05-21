@@ -16,6 +16,21 @@ export type PublicLibraryItem = {
   is_premium: boolean;
   price: number | null;
   currency: string | null;
+  page_count?: number | null;
+  publisher?: string | null;
+  publication_year?: number | null;
+  published_at?: string | null;
+  isbn?: string | null;
+  language?: string | null;
+  estimated_reading_minutes?: number | null;
+  duration_seconds?: number | null;
+  narrator?: string | null;
+  difficulty_level?: string | null;
+  recommended_age_group?: string | null;
+};
+
+type PublicLibraryItemResponse = {
+  item?: PublicLibraryItem;
 };
 
 type LaravelPaginatedResponse<T> = {
@@ -90,4 +105,109 @@ export async function fetchPublicLibraryItems(): Promise<PublicLibraryItem[]> {
 
     return [];
   }
+}
+
+function normalizeSlug(slug: string): string {
+  try {
+    return decodeURIComponent(slug).trim();
+  } catch {
+    return slug.trim();
+  }
+}
+
+async function fetchLibraryJson<T>(url: string): Promise<T | null> {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+      next: { revalidate: 300 },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchPublicLibraryItemFromShow(
+  slug: string,
+): Promise<PublicLibraryItem | null> {
+  const payload = await fetchLibraryJson<PublicLibraryItemResponse>(
+    apiEndpoints.publicLibraryItem(slug),
+  );
+
+  return payload?.item ?? null;
+}
+
+async function fetchPublicLibraryItemFromCatalogSlug(
+  slug: string,
+): Promise<PublicLibraryItem | null> {
+  const params = new URLSearchParams({
+    slug,
+    per_page: "1",
+  });
+  const payload = await fetchLibraryJson<LaravelPaginatedResponse<PublicLibraryItem>>(
+    `${apiEndpoints.publicLibraryItems}?${params.toString()}`,
+  );
+
+  return payload?.data?.find((item) => item.slug === slug) ?? null;
+}
+
+async function findPublicLibraryItemInCatalog(
+  slug: string,
+): Promise<PublicLibraryItem | null> {
+  const perPage = 50;
+  let page = 1;
+  let lastPage = 1;
+
+  while (page <= lastPage) {
+    const params = new URLSearchParams({
+      per_page: String(perPage),
+      page: String(page),
+    });
+    const payload = await fetchLibraryJson<LaravelPaginatedResponse<PublicLibraryItem>>(
+      `${apiEndpoints.publicLibraryItems}?${params.toString()}`,
+    );
+
+    if (!payload?.data?.length) {
+      return null;
+    }
+
+    const match = payload.data.find((item) => item.slug === slug);
+    if (match) {
+      return match;
+    }
+
+    lastPage = payload.last_page ?? 1;
+    page += 1;
+  }
+
+  return null;
+}
+
+export async function fetchPublicLibraryItem(
+  slug: string,
+): Promise<PublicLibraryItem | null> {
+  const normalized = normalizeSlug(slug);
+  if (!normalized) {
+    return null;
+  }
+
+  const fromShow = await fetchPublicLibraryItemFromShow(normalized);
+  if (fromShow) {
+    return fromShow;
+  }
+
+  const fromSlugQuery = await fetchPublicLibraryItemFromCatalogSlug(normalized);
+  if (fromSlugQuery) {
+    return fromSlugQuery;
+  }
+
+  return findPublicLibraryItemInCatalog(normalized);
 }

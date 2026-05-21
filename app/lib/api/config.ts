@@ -11,6 +11,8 @@ export const apiConfig = {
 
 export const apiEndpoints = {
   publicLibraryItems: `${apiConfig.baseUrl}/api/public/library-items`,
+  publicLibraryItem: (slug: string) =>
+    `${apiConfig.baseUrl}/api/public/library-items/${encodeURIComponent(slug)}`,
   publicDvLottery: `${apiConfig.baseUrl}/api/public/dv-lottery`,
   publicCommunityPosts: `${apiConfig.baseUrl}/api/community/posts`,
   publicCommunityPost: (id: number) =>

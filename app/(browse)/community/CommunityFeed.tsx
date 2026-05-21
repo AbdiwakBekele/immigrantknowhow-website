@@ -5,11 +5,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { PublicCommunityPost, PublicNewsItem } from "@/app/lib/api/community";
 import { apiEndpoints } from "@/app/lib/api/config";
 
-import CommunityNewsPanel from "./CommunityNewsPanel";
-import CommunityPostCard from "./CommunityPostCard";
-import CommunityRecentPosts from "./CommunityRecentPosts";
-import CommunitySidebar from "./CommunitySidebar";
-import { categoryLabels, type CommunitySection } from "./community-config";
+import CommunityNewsPanel from "@/app/(browse)/community/CommunityNewsPanel";
+import CommunityPostCard from "@/app/(browse)/community/CommunityPostCard";
+import CommunityRecentPosts from "@/app/(browse)/community/CommunityRecentPosts";
+import CommunitySidebar from "@/app/(browse)/community/CommunitySidebar";
+import {
+  categoryLabels,
+  type CommunitySection,
+} from "@/app/(browse)/community/community-config";
 
 type Props = {
   initialPosts: PublicCommunityPost[];
@@ -197,8 +200,8 @@ export default function CommunityFeed({
   });
 
   return (
-    <section className="min-h-screen bg-slate-50 py-4 md:py-6">
-      <div className="mx-auto max-w-[1380px] px-3 sm:px-4 lg:px-6">
+    <section className="py-2 md:py-4">
+      <div className="px-0">
         <div className="flex flex-col gap-3 md:flex-row md:gap-4">
           <CommunitySidebar
             activeSection={activeSection}

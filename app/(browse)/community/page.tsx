@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import SitePage from "@/app/components/Layout/SitePage";
 import {
   fetchPublicCommunityPostsPage,
 } from "@/app/lib/api/community";
@@ -18,10 +19,12 @@ export default async function PublicCommunityPage() {
   ]);
 
   return (
-    <CommunityFeed
-      initialPosts={posts}
-      initialLastPage={lastPage}
-      initialRecentPosts={recentPage.posts}
-    />
+    <SitePage wide flush className="ikh-site-page--community">
+      <CommunityFeed
+        initialPosts={posts}
+        initialLastPage={lastPage}
+        initialRecentPosts={recentPage.posts}
+      />
+    </SitePage>
   );
 }

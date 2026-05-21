@@ -1,6 +1,4 @@
-import HomeFooter from "@/app/home/shared/HomeFooter";
-import HomeHeader from "@/app/home/shared/HomeHeader";
-import { joinUrl, loginUrl } from "@/app/home/shared/data";
+import SitePage from "@/app/components/Layout/SitePage";
 
 const policyContent = `Immigrant Knowhow (https://Immigrantknowhow.com) understands that your privacy is important to you. We are committed to protecting the privacy of your personally-identifiable information as you use this website.
 
@@ -534,23 +532,13 @@ export default function TermsPage() {
     .filter(Boolean);
 
   return (
-    <>
-      <HomeHeader
-        joinUrl={joinUrl}
-        loginUrl={loginUrl}
-        logoSrc="/images/home/2024/05/ImmigrantsKnowHow-Logo.svg"
-      />
-      <main className="bg-white">
-        <div className="mx-auto w-full max-w-4xl px-6 py-12 md:px-10 md:py-16 lg:px-12">
-          <h1 className="text-center text-3xl font-extrabold tracking-tight text-black md:text-4xl">Privacy Policy</h1>
-          <article className="ikh-privacy-prose mt-8 text-balance sm:mt-10 [&>h2:first-of-type]:mt-6">
-            {blocks.map((block, idx) => (
-              <PolicyBlock key={`p-${idx}-${block.slice(0, 32)}`} block={block} />
-            ))}
-          </article>
-        </div>
-      </main>
-      <HomeFooter />
-    </>
+    <SitePage narrow>
+      <h1 className="ikh-site-page__title">Privacy Policy</h1>
+      <article className="ikh-privacy-prose mt-8 text-balance sm:mt-10 [&>h2:first-of-type]:mt-6">
+        {blocks.map((block, idx) => (
+          <PolicyBlock key={`p-${idx}-${block.slice(0, 32)}`} block={block} />
+        ))}
+      </article>
+    </SitePage>
   );
 }

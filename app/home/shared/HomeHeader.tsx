@@ -1,13 +1,20 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useState, type MouseEvent } from 'react'
 
 import { MEMBER_CTA_LABEL } from '@/app/lib/hub-links'
-import { COMMUNITY_PAGE_PATH } from '@/app/lib/site-links'
+import {
+  hasServicesSectionOnPage,
+  scrollToServicesSection,
+  SERVICES_SECTION_PATH,
+} from '@/app/lib/services-scroll'
+import {
+  COMMUNITY_PAGE_PATH,
+  CONTACT_PAGE_PATH,
+} from '@/app/lib/site-links'
 
-import CountryNavDropdown from './CountryNavDropdown'
 import ResourceNavDropdown from './ResourceNavDropdown'
 import { PrimaryButton } from './ui'
 
@@ -20,9 +27,23 @@ export default function HomeHeader({
   loginUrl: string
   logoSrc: string
 }) {
+  const router = useRouter()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   const closeMobileNav = () => setIsMobileNavOpen(false)
+
+  const handleServicesClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    closeMobileNav()
+    event.preventDefault()
+
+    if (hasServicesSectionOnPage()) {
+      scrollToServicesSection()
+      window.history.replaceState(null, '', '#services')
+      return
+    }
+
+    router.push(SERVICES_SECTION_PATH)
+  }
 
   return (
     <>
@@ -33,11 +54,12 @@ export default function HomeHeader({
           </Link>
 
           <nav className="ikh-nav" aria-label="Primary navigation">
-            <a href="#services">Services</a>
-            <CountryNavDropdown />
+            <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
+              Services
+            </Link>
             <ResourceNavDropdown />
-            <a href={COMMUNITY_PAGE_PATH}>Community</a>
-            <Link href="/contact">Contact</Link>
+            <Link href={COMMUNITY_PAGE_PATH}>Community</Link>
+            <Link href={CONTACT_PAGE_PATH}>Contact</Link>
           </nav>
 
           <div className="ikh-header-actions">
@@ -72,19 +94,17 @@ export default function HomeHeader({
         aria-label="Mobile navigation"
       >
         <div className="ikh-shell ikh-mobile-nav__inner">
-          <a href="#services" onClick={closeMobileNav}>
+          <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
             Services
-          </a>
+          </Link>
 
-          <CountryNavDropdown />
+          <ResourceNavDropdown onLinkClick={closeMobileNav} />
 
-          <ResourceNavDropdown />
-
-          <a href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
+          <Link href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
             Community
-          </a>
+          </Link>
 
-          <Link href="/contact" onClick={closeMobileNav}>
+          <Link href={CONTACT_PAGE_PATH} onClick={closeMobileNav}>
             Contact
           </Link>
 

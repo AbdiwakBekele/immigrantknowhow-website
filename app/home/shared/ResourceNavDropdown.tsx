@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 import { DV_LOTTERY_PAGE_PATH, LIBRARY_PAGE_PATH } from '@/app/lib/site-links'
@@ -10,7 +11,11 @@ const resourceLinks = [
   { label: 'Articles', href: '#' },
 ]
 
-export default function ResourceNavDropdown() {
+export default function ResourceNavDropdown({
+  onLinkClick,
+}: {
+  onLinkClick?: () => void
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
 
@@ -28,14 +33,19 @@ export default function ResourceNavDropdown() {
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('click', handleOutsideClick)
     document.addEventListener('keydown', handleEscape)
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
+      document.removeEventListener('click', handleOutsideClick)
       document.removeEventListener('keydown', handleEscape)
     }
   }, [])
+
+  const handleLinkClick = () => {
+    setIsOpen(false)
+    onLinkClick?.()
+  }
 
   return (
     <div className={`ikh-nav-dropdown ${isOpen ? 'is-open' : ''}`} ref={rootRef}>
@@ -45,20 +55,23 @@ export default function ResourceNavDropdown() {
         aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-label="Resources menu"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={(event) => {
+          event.stopPropagation()
+          setIsOpen((prev) => !prev)
+        }}
       >
         Resources
       </button>
       <div className="ikh-nav-dropdown__menu" role="menu" aria-label="Resources links">
         {resourceLinks.map((item) => (
-          <a
+          <Link
             key={item.label}
             href={item.href}
             role="menuitem"
-            onClick={() => setIsOpen(false)}
+            onClick={handleLinkClick}
           >
             {item.label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
