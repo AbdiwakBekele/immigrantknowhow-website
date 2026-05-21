@@ -2,7 +2,7 @@
 
 import type { PublicNewsItem } from "@/app/lib/api/community";
 
-import { newsCountries } from "./community-config";
+import { newsCountries } from "@/app/(browse)/community/community-config";
 
 type Props = {
   country: string;

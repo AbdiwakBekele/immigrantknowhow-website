@@ -35,8 +35,8 @@ export default function CommunityPostView({ post, comments }: Props) {
       : `/community/${post.id}`;
 
   return (
-    <section className="min-h-screen bg-slate-50 py-4 md:py-6">
-      <div className="mx-auto max-w-5xl px-3 sm:px-4 lg:px-6">
+    <section className="py-2 md:py-4">
+      <div className="w-full">
         <Link
           href="/community"
           className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-blue-700 shadow-sm transition hover:bg-blue-50"

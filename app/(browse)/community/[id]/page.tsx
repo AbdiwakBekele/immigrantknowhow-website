@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import SitePage from "@/app/components/Layout/SitePage";
 import {
   fetchPublicCommunityComments,
   fetchPublicCommunityPost,
@@ -44,5 +45,9 @@ export default async function CommunityPostPage({ params }: Props) {
     notFound();
   }
 
-  return <CommunityPostView post={post} comments={comments} />;
+  return (
+    <SitePage narrow>
+      <CommunityPostView post={post} comments={comments} />
+    </SitePage>
+  );
 }

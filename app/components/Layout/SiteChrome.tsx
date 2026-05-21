@@ -2,7 +2,11 @@ import HomeFooter from "@/app/home/shared/HomeFooter";
 import HomeHeader from "@/app/home/shared/HomeHeader";
 import { joinUrl, loginUrl } from "@/app/home/shared/data";
 
-export default function SiteLayout({
+import ServicesHashScroll from "./ServicesHashScroll";
+
+const SITE_LOGO_SRC = "/images/home/2024/05/ImmigrantsKnowHow-Logo.svg";
+
+export default function SiteChrome({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -12,9 +16,10 @@ export default function SiteLayout({
       <HomeHeader
         joinUrl={joinUrl}
         loginUrl={loginUrl}
-        logoSrc="/images/home/2024/05/ImmigrantsKnowHow-Logo.svg"
+        logoSrc={SITE_LOGO_SRC}
       />
-      <main>{children}</main>
+      <ServicesHashScroll />
+      {children}
       <HomeFooter />
     </>
   );
