@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { apiEndpoints } from "./config";
 
 type LibraryCategory = {
@@ -40,6 +41,36 @@ type LaravelPaginatedResponse<T> = {
   per_page: number;
   total: number;
 };
+
+export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryEbooks(
+  limit = 6,
+): Promise<PublicLibraryItem[]> {
+  const params = new URLSearchParams({
+    type: "ebook",
+    per_page: String(limit),
+    page: "1",
+  });
+  const requestUrl = `${apiEndpoints.publicLibraryItems}?${params.toString()}`;
+
+  try {
+    const response = await fetch(requestUrl, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      next: { revalidate: 300 },
+    });
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const payload =
+      (await response.json()) as LaravelPaginatedResponse<PublicLibraryItem>;
+
+    return payload.data ?? [];
+  } catch {
+    return [];
+  }
+});
 
 export async function fetchPublicLibraryItems(): Promise<PublicLibraryItem[]> {
   const requestUrl = `${apiEndpoints.publicLibraryItems}?per_page=24`;

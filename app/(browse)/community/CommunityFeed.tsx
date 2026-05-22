@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import type { PublicCommunityPost, PublicNewsItem } from "@/app/lib/api/community";
 import { apiEndpoints } from "@/app/lib/api/config";
@@ -11,6 +12,7 @@ import CommunityRecentPosts from "@/app/(browse)/community/CommunityRecentPosts"
 import CommunitySidebar from "@/app/(browse)/community/CommunitySidebar";
 import {
   categoryLabels,
+  communitySectionFromParam,
   type CommunitySection,
 } from "@/app/(browse)/community/community-config";
 
@@ -34,7 +36,9 @@ export default function CommunityFeed({
   initialLastPage,
   initialRecentPosts,
 }: Props) {
-  const [activeSection, setActiveSection] = useState<CommunitySection>("feed");
+  const searchParams = useSearchParams();
+  const initialSection = communitySectionFromParam(searchParams.get("section"));
+  const [activeSection, setActiveSection] = useState<CommunitySection>(initialSection);
   const [search, setSearch] = useState("");
   const [posts, setPosts] = useState(initialPosts);
   const [recentPosts] = useState(initialRecentPosts);
@@ -144,6 +148,12 @@ export default function CommunityFeed({
     }
     void loadPosts(1, section, search, true);
   };
+
+  useEffect(() => {
+    if (initialSection === "immigration-news" && newsItems.length === 0 && !newsLoading) {
+      void loadNews(newsCountry);
+    }
+  }, [initialSection, loadNews, newsCountry, newsItems.length, newsLoading]);
 
   useEffect(() => {
     if (searchDebounceRef.current) {

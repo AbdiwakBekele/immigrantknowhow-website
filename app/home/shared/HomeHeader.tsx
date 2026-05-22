@@ -4,19 +4,16 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState, type MouseEvent } from 'react'
 
-import { MEMBER_CTA_LABEL } from '@/app/lib/hub-links'
+import { HUB_REGISTER_URL } from '@/app/lib/hub-links'
 import {
-  hasServicesSectionOnPage,
   scrollToServicesSection,
+  hasServicesSectionOnPage,
   SERVICES_SECTION_PATH,
 } from '@/app/lib/services-scroll'
-import {
-  COMMUNITY_PAGE_PATH,
-  CONTACT_PAGE_PATH,
-} from '@/app/lib/site-links'
+import { COMMUNITY_PAGE_PATH, CONTACT_PAGE_PATH } from '@/app/lib/site-links'
 
 import ResourceNavDropdown from './ResourceNavDropdown'
-import { PrimaryButton } from './ui'
+import { ArrowIcon } from './ui'
 
 export default function HomeHeader({
   joinUrl,
@@ -38,7 +35,7 @@ export default function HomeHeader({
 
     if (hasServicesSectionOnPage()) {
       scrollToServicesSection()
-      window.history.replaceState(null, '', '#services')
+      window.history.replaceState(null, '', SERVICES_SECTION_PATH)
       return
     }
 
@@ -57,20 +54,23 @@ export default function HomeHeader({
             <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
               Services
             </Link>
-            <ResourceNavDropdown />
-            <Link href={COMMUNITY_PAGE_PATH}>Community</Link>
-            <Link href={CONTACT_PAGE_PATH}>Contact</Link>
+            <ResourceNavDropdown onLinkClick={closeMobileNav} />
+            <Link href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
+              Community
+            </Link>
+            <Link href={CONTACT_PAGE_PATH} onClick={closeMobileNav}>
+              Contact
+            </Link>
           </nav>
 
           <div className="ikh-header-actions">
-            <a
-              href={loginUrl}
-              className="ikh-button ikh-button--outline"
-            >
+            <a href={loginUrl} className="ikh-header-login">
               Sign-in
             </a>
-
-            <PrimaryButton joinUrl={joinUrl}>{MEMBER_CTA_LABEL}</PrimaryButton>
+            <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-cta">
+              <ArrowIcon />
+              <span>Become A Member</span>
+            </a>
           </div>
 
           <button
@@ -97,28 +97,20 @@ export default function HomeHeader({
           <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
             Services
           </Link>
-
           <ResourceNavDropdown onLinkClick={closeMobileNav} />
-
           <Link href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
             Community
           </Link>
-
           <Link href={CONTACT_PAGE_PATH} onClick={closeMobileNav}>
             Contact
           </Link>
-
-          <a
-            href={loginUrl}
-            onClick={closeMobileNav}
-            className="ikh-button ikh-button--outline"
-          >
-            Login
+          <a href={loginUrl} onClick={closeMobileNav} className="ikh-header-login">
+            Sign-in
           </a>
-
-          <PrimaryButton joinUrl={joinUrl} onClick={closeMobileNav}>
-            {MEMBER_CTA_LABEL}
-          </PrimaryButton>
+          <a href={joinUrl || HUB_REGISTER_URL} onClick={closeMobileNav} className="ikh-header-cta">
+            <ArrowIcon />
+            <span>Become A Member</span>
+          </a>
         </div>
       </nav>
     </>

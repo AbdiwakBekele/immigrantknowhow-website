@@ -9,9 +9,9 @@ export const communityUrl = COMMUNITY_PAGE_PATH
 export const memberCtaLabel = MEMBER_CTA_LABEL
 
 export const heroChecklist = [
-  { label: 'Tour Guides:', text: 'Discover your new home with local experts' },
-  { label: 'Pet Sitters:', text: 'Book trusted care when you need it' },
-  { label: 'Tutors:', text: 'Get academic help in your language' },
+  { label: 'Service Providers:', text: 'Find trusted help near you' },
+  { label: 'Resources:', text: 'Learn from articles, posts, videos, and ebooks' },
+  { label: 'Community:', text: 'Connect with people who understand your journey' },
 ]
 
 export const howItWorks = [
@@ -66,27 +66,6 @@ export const thriveCards = [
   { title: 'Entrepreneurship and More', body: 'Start a business, get licensed, and grow your future', image: asset('2025/07/Entrepreneurship.png') },
 ]
 
-export const welcomeList = [
-  'Join region-specific forums',
-  'Ask questions and get honest answers',
-  'Learn from peers and professionals',
-  'Find verified service providers nearby',
-]
-
-export const problems = [
-  'Financial stress with no one to ask',
-  'Chronic loneliness in a new place',
-  'No access to reliable legal advice',
-  'Struggling to feel like you belong',
-]
-
-export const memberBenefits = [
-  'Learn how to manage finances in your new country',
-  'Connect with people going through the same journey',
-  'Get verified legal and immigration help',
-  'Access real community, not just information',
-]
-
 export const services = [
   {
     title: 'Tutors',
@@ -105,61 +84,6 @@ export const services = [
     body: 'Need someone you can trust with your pet? Find reliable local sitters, often fellow immigrants, who treat your pet like family.',
     image: asset('2025/07/Dog-Sitters-1-1024x683.webp'),
     icon: asset('2025/07/pet-care-2.png'),
-  },
-]
-
-export const countries = [
-  {
-    title: 'USA',
-    body: 'Find services, ask questions, and connect with others building a new life across the United States.',
-    image: asset('2025/07/USA-1.webp'),
-    href: '/united-states',
-  },
-  {
-    title: 'Canada',
-    body: 'Access Canada-specific support and immigrant-led resources for work, school, and community life.',
-    image: asset('2025/07/Canada-1-1-1024x567.webp'),
-    href: '/canada-immigrants',
-  },
-  {
-    title: 'Europe',
-    body: 'Join a growing European community with services and insights tailored to your local country and culture.',
-    image: asset('2025/07/Europe-2-1-1024x576.webp'),
-    href: '/europe',
-  },
-  {
-    title: 'Great Britain',
-    body: 'Join a growing Great Britain community with services and insights tailored to your local country and culture.',
-    image: asset('2025/09/Great-Britain.jpg'),
-    href: '/great-britain',
-  },
-]
-
-export const realLifeCards = [
-  {
-    title: 'Community',
-    body: 'Join local forums, share experiences, ask questions, and connect with others who truly understand your journey and challenges.',
-    image: asset('2025/07/engagement-1.png'),
-  },
-  {
-    title: 'Pet Services',
-    body: 'Find reliable pet sitters who respect your culture, lifestyle, and language, ensuring your animals are cared for with love.',
-    image: asset('2025/07/pet-care-2.png'),
-  },
-  {
-    title: 'Tour Guide',
-    body: 'Book trusted local experts to explore your surroundings, learn hidden gems, and feel at home in your new community.',
-    image: asset('2025/07/tour-guide-2.png'),
-  },
-  {
-    title: 'Tutors',
-    body: 'Get personalized academic support for you or your children, always available in multiple languages to meet your learning goals.',
-    image: asset('2025/07/tutoring-2.png'),
-  },
-  {
-    title: 'Faith & Culture',
-    body: 'Stay rooted and connected with local faith groups and cultural communities that celebrate traditions and belonging.',
-    image: asset('2025/07/church.png'),
   },
 ]
 
@@ -213,23 +137,19 @@ export const testimonialCards = Array.from({ length: 3 }, (_, groupIndex) =>
 
 export const faqs = [
   {
-    q: 'What is Immigrant Knowhow and how does it work?',
-    a: "Immigrant Knowhow is a platform that connects immigrants with trusted services, local community support, and expert guidance, customized for your country. You choose your region, explore listings, join forums, and get help from others who've been in your shoes.",
+    q: 'Is Immigrant Knowhow legal, tax, or financial advice?',
+    a: 'No. The platform provides educational information only. Users should consult a qualified lawyer, tax professional, or financial advisor before making decisions.',
   },
   {
-    q: 'Is Immigrant Knowhow free to use?',
-    a: 'Yes! You can sign up for free to access community forums, browse services, and ask questions. Some premium content and provider services may include optional fees.',
+    q: 'Do I need an account to contact providers?',
+    a: 'Yes. Visitors can browse previews, but provider access and hub features require login.',
   },
   {
-    q: 'How are service providers verified?',
-    a: 'All providers go through an identity verification process and are manually approved by our team before they appear in the public directory.',
+    q: 'Can I search by language?',
+    a: 'Yes. The homepage search includes spoken language as an optional filter.',
   },
   {
-    q: 'Is it safe to book services through Immigrant Knowhow?',
-    a: 'Yes. Every service provider on our platform goes through identity verification and manual review before being approved. You can view their profiles, read reviews, and only release payment after a service is delivered.',
-  },
-  {
-    q: 'Which countries do you currently serve?',
-    a: 'We currently support users in the United States, Canada, Great Britain and Europe, with country-specific services and forums in each.',
+    q: 'What types of services are available?',
+    a: 'The hub can include many categories such as legal, tax, housing, education, healthcare, family, business, and local support services.',
   },
 ]

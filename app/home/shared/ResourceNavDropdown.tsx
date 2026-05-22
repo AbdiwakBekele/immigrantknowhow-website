@@ -3,12 +3,13 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-import { DV_LOTTERY_PAGE_PATH, LIBRARY_PAGE_PATH } from '@/app/lib/site-links'
+import { HOME_PAGE_PATH, LIBRARY_PAGE_PATH } from '@/app/lib/site-links'
+
+import { IMMIGRANT_RESOURCES_SECTION_ID } from './immigrant-resources-data'
 
 const resourceLinks = [
   { label: 'Library', href: LIBRARY_PAGE_PATH },
-  { label: 'DV Lottery', href: DV_LOTTERY_PAGE_PATH },
-  { label: 'Articles', href: '#' },
+  { label: 'Articles', href: `${HOME_PAGE_PATH}#${IMMIGRANT_RESOURCES_SECTION_ID}` },
 ]
 
 export default function ResourceNavDropdown({
@@ -20,6 +21,8 @@ export default function ResourceNavDropdown({
   const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (!isOpen) return
+
     function handleOutsideClick(event: MouseEvent) {
       if (!rootRef.current) return
       if (!rootRef.current.contains(event.target as Node)) {
@@ -33,14 +36,14 @@ export default function ResourceNavDropdown({
       }
     }
 
-    document.addEventListener('click', handleOutsideClick)
+    document.addEventListener('mousedown', handleOutsideClick)
     document.addEventListener('keydown', handleEscape)
 
     return () => {
-      document.removeEventListener('click', handleOutsideClick)
+      document.removeEventListener('mousedown', handleOutsideClick)
       document.removeEventListener('keydown', handleEscape)
     }
-  }, [])
+  }, [isOpen])
 
   const handleLinkClick = () => {
     setIsOpen(false)

@@ -26,3 +26,20 @@ export type CommunitySection =
   | "ask-announcement"
   | (typeof immigrantResourceSections)[number]
   | "immigration-news";
+
+const communitySections = new Set<string>([
+  "feed",
+  "ask-intro",
+  "ask-announcement",
+  "immigration-news",
+  ...immigrantResourceSections,
+]);
+
+export function communitySectionFromParam(value: string | null | undefined): CommunitySection {
+  const normalized = String(value ?? "").trim();
+  if (communitySections.has(normalized)) {
+    return normalized as CommunitySection;
+  }
+
+  return "feed";
+}

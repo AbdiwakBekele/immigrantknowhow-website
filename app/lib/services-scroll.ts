@@ -1,6 +1,7 @@
 import { SERVICES_SECTION_PATH } from "@/app/lib/site-links";
+import { SERVICES_SECTION_ID } from "@/app/lib/home-section-scroll";
 
-export const SERVICES_SECTION_ID = "services";
+export { SERVICES_SECTION_ID };
 
 export function scrollToServicesSection() {
   requestAnimationFrame(() => {

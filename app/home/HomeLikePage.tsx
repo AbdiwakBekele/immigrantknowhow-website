@@ -1,9 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import BuildRealLife from '@/app/components/Home/BuildRealLife'
-import CountriesWeServe from '@/app/components/Home/CountriesWeServe'
-import ProblemVsMember from '@/app/components/Home/ProblemVsMember'
 import TurningLonelinessConnection from '@/app/components/Home/TurningLonelinessConnection'
-import WelcomeSection from '@/app/components/Home/WelcomeSection'
 import WhyImmigrantsTrust from '@/app/components/Home/WhyImmigrantsTrust'
 import WhyWeBuiltImmigrantKnowhow from '@/app/components/Home/WhyWeBuiltImmigrantKnowhow'
 import {
@@ -11,14 +7,18 @@ import {
   heroChecklist,
   howItWorks,
   joinUrl,
-  loginUrl,
-  memberCtaLabel,
   services,
   testimonialCards,
   thriveCards,
 } from './shared/data'
 import { CountryPageConfig } from './shared/country-pages'
 import CountryHeroSection from './shared/CountryHeroSection'
+import type { PublicServiceType } from '@/app/lib/api/service-types'
+import FindServicesSection from './shared/FindServicesSection'
+import HelpfulEbooksSection from './shared/HelpfulEbooksSection'
+import ImmigrantResourcesSection from './shared/ImmigrantResourcesSection'
+import type { PublicCommunityPost, PublicNewsItem } from '@/app/lib/api/community'
+import type { PublicLibraryItem } from '@/app/lib/api/library'
 import {
   CountryCompareSection,
   CountryHighlightsSection,
@@ -30,11 +30,25 @@ import {
   TestimonialsSection,
   WelcomeCommunitySection,
 } from './shared/shared-sections'
-import { CheckIcon, PrimaryButton, SectionActions, TrustNote } from './shared/ui'
+import HeroSearchPanel from './shared/HeroSearchPanel'
+import { CheckIcon, CompassIcon, SectionActions, TrustNote } from './shared/ui'
+import { HUB_PROVIDER_REGISTER_URL } from '@/app/lib/hub-links'
 
 const asset = (path: string) => `/images/home/${path}`
 
-export default function HomeLikePage({ config }: { config: CountryPageConfig }) {
+type HomeLikePageProps = {
+  config: CountryPageConfig
+  serviceTypes?: PublicServiceType[]
+  ebooks?: PublicLibraryItem[]
+  resourceArticles?: PublicNewsItem[]
+  resourceVideos?: PublicCommunityPost[]
+}
+
+export default function HomeLikePage(props: HomeLikePageProps) {
+  const { config } = props
+  const allServiceTypes = props.serviceTypes ?? []
+  const carouselServiceTypes = allServiceTypes.slice(0, 6)
+  const homeEbooks = props.ebooks ?? []
   const isCountryPage = config.heroVariant === 'country'
   const servicesCountryName = config.pageTitle === 'United States' ? 'the United States' : config.pageTitle
   const resourcesLabel = isCountryPage
@@ -77,10 +91,14 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
               </ul>
 
               <div className="ikh-hero__buttons">
-                <PrimaryButton joinUrl={loginUrl} variant="outline">
-                  Sign-in
-                </PrimaryButton>
-                <PrimaryButton joinUrl={joinUrl}>{memberCtaLabel}</PrimaryButton>
+                <a href={HUB_PROVIDER_REGISTER_URL} className="ikh-button ikh-button--hero">
+                  <CompassIcon />
+                  <span>Register As Provider</span>
+                </a>
+                <a href={joinUrl} className="ikh-button ikh-button--hero">
+                  <CompassIcon />
+                  <span>Join Now!</span>
+                </a>
               </div>
 
               <TrustNote light />
@@ -89,6 +107,10 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
             <div className="ikh-hero__media" aria-hidden="true">
               <img src={config.heroImage} alt="" className={`ikh-hero__image ${config.heroImageClassName ?? ''}`} />
             </div>
+          </div>
+
+          <div className="ikh-shell ikh-hero__search-wrap">
+            <HeroSearchPanel serviceTypes={allServiceTypes} />
           </div>
         </section>
       )}
@@ -137,55 +159,50 @@ export default function HomeLikePage({ config }: { config: CountryPageConfig }) 
         </section>
       ) : null}
 
-      {!isCountryPage ? <WelcomeSection /> : null}
+      {!isCountryPage ? <FindServicesSection serviceTypes={carouselServiceTypes} /> : null}
 
-      {!isCountryPage ? <ProblemVsMember /> : null}
+      {!isCountryPage ? <HelpfulEbooksSection ebooks={homeEbooks} /> : null}
+
+      {!isCountryPage ? (
+        <ImmigrantResourcesSection
+          articles={props.resourceArticles ?? []}
+          videos={props.resourceVideos ?? []}
+        />
+      ) : null}
 
       {isCountryPage ? <WelcomeCommunitySection welcomeImage="/Welcome-to-Immigrant-TabMob.webp" /> : null}
 
       {isCountryPage ? <CountryCompareSection countryName={config.pageTitle} /> : null}
 
-      <section id="services" className="ikh-section ikh-services">
-        <div className="ikh-shell">
-          <h2
-            className={`ikh-heading ikh-heading--center ${isCountryPage ? 'ikh-heading--services-country' : 'ikh-heading--narrow'}`}
-          >
-            {isCountryPage ? (
-              <>
-                Services for <span className="secondary">Immigrants</span> in {servicesCountryName}
-              </>
-            ) : (
-              'Services We Offer'
-            )}
-          </h2>
-          <p className={`ikh-section-copy ${isCountryPage ? 'ikh-section-copy--services-country' : ''}`}>
-            {servicesSubtitle}
-          </p>
+      {isCountryPage ? (
+        <section id="services-we-offer" className="ikh-section ikh-services">
+          <div className="ikh-shell">
+            <h2 className="ikh-heading ikh-heading--center ikh-heading--services-country">
+              Services for <span className="secondary">Immigrants</span> in {servicesCountryName}
+            </h2>
+            <p className="ikh-section-copy ikh-section-copy--services-country">{servicesSubtitle}</p>
 
-          <div className="ikh-service-grid">
-            {services.map((item) => (
-              <article className="ikh-service-card" key={item.title}>
-                <div className="ikh-service-card__media">
-                  <img src={item.image} alt={item.title} />
-                  <span className="ikh-service-card__icon" aria-hidden="true">
-                    <img src={item.icon} alt="" />
-                  </span>
-                </div>
-                <div className="ikh-service-card__body">
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </div>
-              </article>
-            ))}
+            <div className="ikh-service-grid">
+              {services.map((item) => (
+                <article className="ikh-service-card" key={item.title}>
+                  <div className="ikh-service-card__media">
+                    <img src={item.image} alt={item.title} />
+                    <span className="ikh-service-card__icon" aria-hidden="true">
+                      <img src={item.icon} alt="" />
+                    </span>
+                  </div>
+                  <div className="ikh-service-card__body">
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <SectionActions joinUrl={joinUrl} />
           </div>
-
-          <SectionActions joinUrl={joinUrl} />
-        </div>
-      </section>
-
-      {!isCountryPage ? <CountriesWeServe /> : null}
-
-      {!isCountryPage ? <BuildRealLife /> : null}
+        </section>
+      ) : null}
 
       {isCountryPage ? <CountryHighlightsSection countryName={config.pageTitle} /> : null}
 
