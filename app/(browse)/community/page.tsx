@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import SitePage from "@/app/components/Layout/SitePage";
 import {
@@ -20,11 +21,13 @@ export default async function PublicCommunityPage() {
 
   return (
     <SitePage wide flush className="ikh-site-page--community">
-      <CommunityFeed
-        initialPosts={posts}
-        initialLastPage={lastPage}
-        initialRecentPosts={recentPage.posts}
-      />
+      <Suspense fallback={null}>
+        <CommunityFeed
+          initialPosts={posts}
+          initialLastPage={lastPage}
+          initialRecentPosts={recentPage.posts}
+        />
+      </Suspense>
     </SitePage>
   );
 }

@@ -19,10 +19,11 @@ export default async function PublicDvLotteryPage() {
 
   return (
     <SitePage narrow>
-      <header className="mb-8">
-        <p className="ikh-site-page__eyebrow">Immigration resource</p>
-        <h1 className="ikh-site-page__title">{content.title || "DV Lottery"}</h1>
-        <p className="ikh-site-page__lead">
+      <header className="mb-8 border-b border-[#e8ecf4] pb-7">
+        <h1 className="m-0 text-4xl font-bold tracking-tight text-[#111827] md:text-5xl">
+          {content.title || "DV Lottery"}
+        </h1>
+        <p className="mt-3 max-w-2xl text-lg leading-relaxed text-[#374151]">
           {content.short_description ||
             "Official Diversity Visa information from the U.S. Department of State."}
         </p>

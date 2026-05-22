@@ -9,6 +9,16 @@ export function ArrowIcon() {
   )
 }
 
+export function CompassIcon({ className = 'ikh-button__icon' }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 4.5v3.2M12 16.3v3.2M4.5 12h3.2M16.3 12h3.2" />
+      <path d="m8.2 8.2 2.4 5.6 5.6 2.4-2.4-5.6z" />
+    </svg>
+  )
+}
+
 export function CheckIcon({ kind = 'blue' }: { kind?: 'blue' | 'white' }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className={`ikh-list-icon ikh-list-icon--${kind}`}>

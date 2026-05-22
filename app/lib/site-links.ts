@@ -6,4 +6,39 @@ export const libraryItemPagePath = (slug: string) =>
   `/library/${encodeURIComponent(slug)}`;
 export const DV_LOTTERY_PAGE_PATH = "/dv-lottery";
 export const COMMUNITY_PAGE_PATH = "/community";
+export const PROVIDERS_PAGE_PATH = "/providers";
 export const CONTACT_PAGE_PATH = "/contact";
+
+export type ProviderSearchParams = {
+  service_type?: string;
+  location?: string;
+  language?: string;
+  search?: string;
+  page?: string;
+  sort?: string;
+};
+
+/** Marketing-site provider search results (query string mirrors hub filters). */
+export function providersSearchPath(params?: ProviderSearchParams): string {
+  const search = new URLSearchParams();
+  if (params?.service_type) {
+    search.set("service_type", params.service_type);
+  }
+  if (params?.location?.trim()) {
+    search.set("location", params.location.trim());
+  }
+  if (params?.language?.trim()) {
+    search.set("language", params.language.trim());
+  }
+  if (params?.search?.trim()) {
+    search.set("search", params.search.trim());
+  }
+  if (params?.page?.trim()) {
+    search.set("page", params.page.trim());
+  }
+  if (params?.sort?.trim()) {
+    search.set("sort", params.sort.trim());
+  }
+  const query = search.toString();
+  return query ? `${PROVIDERS_PAGE_PATH}?${query}` : PROVIDERS_PAGE_PATH;
+}

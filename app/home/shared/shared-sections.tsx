@@ -149,7 +149,7 @@ export function HowItWorksSection({
   subtitle?: string
 }) {
   return (
-    <section className="ikh-section ikh-how">
+    <section id="how" className="ikh-section ikh-how">
       <div className="ikh-shell">
         <h2 className="ikh-heading ikh-heading--center">
           {titlePrefix && titleHighlight ? (
@@ -392,15 +392,17 @@ export function TestimonialsSection({
 
 export function FaqSection({ faqs }: { faqs: FaqItem[] }) {
   return (
-    <section className="ikh-section ikh-faq">
+    <section id="faq" className="ikh-section ikh-faq">
       <div className="ikh-shell ikh-faq__shell">
-        <h2 className="ikh-heading ikh-heading--center">Frequently Asked Questions</h2>
+        <h2 className="ikh-heading ikh-heading--center">
+          Frequently Asked <span className="secondary">Questions</span>
+        </h2>
         <div className="ikh-faq__list">
-          {faqs.map((item, index) => (
-            <details className="ikh-faq__item" key={item.q} open={index === 0}>
-              <summary>{item.q}</summary>
-              <p>{item.a}</p>
-            </details>
+          {faqs.map((item) => (
+            <article className="ikh-faq__item" key={item.q}>
+              <h3 className="ikh-faq__question">{item.q}</h3>
+              <p className="ikh-faq__answer">{item.a}</p>
+            </article>
           ))}
         </div>
       </div>

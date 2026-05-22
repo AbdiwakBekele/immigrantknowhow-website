@@ -91,6 +91,7 @@ export async function fetchPublicCommunityPostsPage(
   category = "feed",
   search = "",
   perPage = 20,
+  hasVideo = false,
 ): Promise<CommunityPostsPage> {
   const params = new URLSearchParams({
     page: String(page),
@@ -99,6 +100,9 @@ export async function fetchPublicCommunityPostsPage(
   });
   if (search.trim()) {
     params.set("search", search.trim());
+  }
+  if (hasVideo) {
+    params.set("has_video", "1");
   }
 
   const requestUrl = `${apiEndpoints.publicCommunityPosts}?${params.toString()}`;
@@ -173,6 +177,13 @@ export async function fetchPublicCommunityComments(
   } catch {
     return [];
   }
+}
+
+export async function fetchPublicCommunityVideos(
+  limit = 6,
+): Promise<PublicCommunityPost[]> {
+  const page = await fetchPublicCommunityPostsPage(1, "feed", "", limit, true);
+  return page.posts;
 }
 
 export async function fetchPublicCommunityNews(
