@@ -21,7 +21,6 @@ export const apiEndpoints = {
   publicDvLottery: `${apiConfig.baseUrl}/api/public/dv-lottery`,
   publicServiceTypes: `${apiConfig.baseUrl}/api/public/service-types`,
   publicServiceProviders: `${apiConfig.baseUrl}/api/public/service-providers`,
-  publicServiceProviders: `${apiConfig.baseUrl}/api/public/service-providers`,
   publicCommunityPosts: `${apiConfig.baseUrl}/api/community/posts`,
   publicCommunityPost: (id: number) =>
     `${apiConfig.baseUrl}/api/community/posts/${id}`,
