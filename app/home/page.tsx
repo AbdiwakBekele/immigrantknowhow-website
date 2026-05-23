@@ -5,6 +5,8 @@ import HomeLikePage from './HomeLikePage'
 import { HOME_PAGE_CONFIG } from './shared/country-pages'
 import { RESOURCE_CAROUSEL_LIMIT } from './shared/immigrant-resources-data'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const [serviceTypes, ebooks, newsArticles, videoPosts] = await Promise.all([
     fetchPublicServiceTypes(100),

@@ -8,6 +8,8 @@ export const DV_LOTTERY_PAGE_PATH = "/dv-lottery";
 export const COMMUNITY_PAGE_PATH = "/community";
 export const PROVIDERS_PAGE_PATH = "/providers";
 export const CONTACT_PAGE_PATH = "/contact";
+export const TERMS_PAGE_PATH = "/terms";
+export const PRIVACY_PAGE_PATH = "/privacy";
 
 export type ProviderSearchParams = {
   service_type?: string;

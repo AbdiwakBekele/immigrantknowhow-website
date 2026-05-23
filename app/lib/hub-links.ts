@@ -1,11 +1,6 @@
-const productionHubUrl = 'https://hub.immigrantknowhow.com'
-const localHubUrl = 'http://immigrationknowhow.test'
+import { getHubOrigin } from '@/app/lib/hub-origin'
 
-/** Hub web origin. Override with NEXT_PUBLIC_HUB_ORIGIN or NEXT_PUBLIC_HUB_API_BASE_URL in .env.local */
-const HUB_ORIGIN =
-  process.env.NEXT_PUBLIC_HUB_ORIGIN ??
-  process.env.NEXT_PUBLIC_HUB_API_BASE_URL ??
-  (process.env.NODE_ENV === 'development' ? localHubUrl : productionHubUrl)
+const HUB_ORIGIN = getHubOrigin()
 
 export const HUB_LOGIN_URL = `${HUB_ORIGIN}/login`
 export const HUB_REGISTER_URL = `${HUB_ORIGIN}/register`

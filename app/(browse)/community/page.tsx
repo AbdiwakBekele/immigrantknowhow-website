@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import SitePage from "@/app/components/Layout/SitePage";
 import {
+  fetchPublicCommunityNews,
   fetchPublicCommunityPostsPage,
 } from "@/app/lib/api/community";
 
@@ -14,9 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default async function PublicCommunityPage() {
-  const [{ posts, lastPage }, recentPage] = await Promise.all([
+  const [{ posts, lastPage }, recentPage, newsArticles] = await Promise.all([
     fetchPublicCommunityPostsPage(1, "feed", "", 20),
     fetchPublicCommunityPostsPage(1, "feed", "", 5),
+    fetchPublicCommunityNews("US", 10),
   ]);
 
   return (
@@ -26,6 +28,7 @@ export default async function PublicCommunityPage() {
           initialPosts={posts}
           initialLastPage={lastPage}
           initialRecentPosts={recentPage.posts}
+          initialNewsItems={newsArticles}
         />
       </Suspense>
     </SitePage>

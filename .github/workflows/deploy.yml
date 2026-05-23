@@ -22,6 +22,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             npm ci
+            # Requires /var/www/website/.env.production with NEXT_PUBLIC_HUB_API_BASE_URL (see env.production.example)
             npm run build
             # Once Payload is added, uncomment:
             # npx payload migrate

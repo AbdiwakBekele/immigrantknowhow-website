@@ -1,5 +1,6 @@
 import { cache } from 'react'
 import { apiEndpoints } from './config'
+import { FALLBACK_PUBLIC_SERVICE_TYPES } from './service-types-fallback'
 
 export type PublicServiceType = {
   value: string
@@ -24,7 +25,7 @@ export const fetchPublicServiceTypes = cache(async function fetchPublicServiceTy
       headers: {
         Accept: 'application/json',
       },
-      next: { revalidate: 300 },
+      cache: 'no-store',
     })
 
     if (!response.ok) {
@@ -32,13 +33,14 @@ export const fetchPublicServiceTypes = cache(async function fetchPublicServiceTy
         status: response.status,
         url: requestUrl,
       })
-      return []
+      return FALLBACK_PUBLIC_SERVICE_TYPES
     }
 
     const data = (await response.json()) as PublicServiceTypesResponse
-    return data.service_types ?? []
+    const types = data.service_types ?? []
+    return types.length > 0 ? types : FALLBACK_PUBLIC_SERVICE_TYPES
   } catch (error) {
     console.error('[ServiceTypesAPI] Fetch failed', { url: requestUrl, error })
-    return []
+    return FALLBACK_PUBLIC_SERVICE_TYPES
   }
 })
