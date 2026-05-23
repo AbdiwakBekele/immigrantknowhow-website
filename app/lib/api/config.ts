@@ -1,10 +1,7 @@
-const productionHubUrl = "https://hub.immigrantknowhow.com";
-const localHubUrl = "http://immigrationknowhow.test";
+import { getHubOrigin } from "@/app/lib/hub-origin";
 
-/** Hub API origin. Override with NEXT_PUBLIC_HUB_API_BASE_URL in .env.local */
-const baseUrl =
-  process.env.NEXT_PUBLIC_HUB_API_BASE_URL ??
-  (process.env.NODE_ENV === "development" ? localHubUrl : productionHubUrl);
+/** Hub API origin. Override with NEXT_PUBLIC_HUB_ORIGIN or NEXT_PUBLIC_HUB_API_BASE_URL on the server. */
+const baseUrl = getHubOrigin();
 
 export const apiConfig = {
   baseUrl,
@@ -21,10 +18,10 @@ export const apiEndpoints = {
   publicDvLottery: `${apiConfig.baseUrl}/api/public/dv-lottery`,
   publicServiceTypes: `${apiConfig.baseUrl}/api/public/service-types`,
   publicServiceProviders: `${apiConfig.baseUrl}/api/public/service-providers`,
-  publicCommunityPosts: `${apiConfig.baseUrl}/api/community/posts`,
+  publicCommunityPosts: `${apiConfig.baseUrl}/api/public/community/posts`,
   publicCommunityPost: (id: number) =>
-    `${apiConfig.baseUrl}/api/community/posts/${id}`,
+    `${apiConfig.baseUrl}/api/public/community/posts/${id}`,
   publicCommunityComments: (id: number) =>
-    `${apiConfig.baseUrl}/api/community/posts/${id}/comments`,
-  publicCommunityNews: `${apiConfig.baseUrl}/api/community/news`,
+    `${apiConfig.baseUrl}/api/public/community/posts/${id}/comments`,
+  publicCommunityNews: `${apiConfig.baseUrl}/api/public/community/news`,
 };

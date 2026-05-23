@@ -151,7 +151,7 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-black transition-colors">
               Terms
             </Link>
-            <Link href="/terms" className="hover:text-black transition-colors">
+            <Link href="/privacy" className="hover:text-black transition-colors">
               Privacy
             </Link>
           </div>

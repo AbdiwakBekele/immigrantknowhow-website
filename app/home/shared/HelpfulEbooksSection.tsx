@@ -34,13 +34,14 @@ export default function HelpfulEbooksSection({
           <div className="ikh-ebooks-grid">
             {items.map((item) => (
               <article className="ikh-ebooks-card" key={item.slug}>
-                <div
-                  className="ikh-ebooks-card__media"
-                  style={{ backgroundImage: `url('${ebookCoverUrl(item)}')` }}
-                  role="img"
-                  aria-label={item.title}
-                />
+                <div className="ikh-ebooks-card__media ikh-ebooks-card__media--contain">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ebookCoverUrl(item)} alt={item.title} loading="lazy" />
+                </div>
                 <div className="ikh-ebooks-card__body">
+                  {item.category ? (
+                    <p className="ikh-ebooks-card__category">{item.category.name}</p>
+                  ) : null}
                   <h3>{item.title}</h3>
                   <p>{item.description ?? 'Educational ebook for your immigration journey.'}</p>
                   <a className="ikh-ebooks-card__link" href={loginUrl}>

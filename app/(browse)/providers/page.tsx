@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     "Search verified immigration and local service providers by service type, location, and language.",
 };
 
+export const dynamic = "force-dynamic";
+
 type ProvidersPageProps = {
   searchParams: Promise<{
     service_type?: string;

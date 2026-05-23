@@ -87,7 +87,7 @@ export default function CommunityPostView({ post, comments }: Props) {
             {hasPostVideo(post) ? (
               <div className="space-y-4">
                 {youtubeId ? (
-                  <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black">
+                  <div className="relative aspect-video w-full min-h-[280px] overflow-hidden rounded-2xl bg-black md:min-h-[400px]">
                     <iframe
                       src={`https://www.youtube.com/embed/${youtubeId}`}
                       title="Post video"
@@ -98,12 +98,14 @@ export default function CommunityPostView({ post, comments }: Props) {
                   </div>
                 ) : null}
                 {showDirectVideo && post.video_url ? (
-                  <video
-                    src={post.video_url}
-                    className="max-h-[32rem] w-full rounded-2xl bg-black"
-                    controls
-                    playsInline
-                  />
+                  <div className="relative flex aspect-video w-full min-h-[280px] items-center justify-center overflow-hidden rounded-2xl bg-black md:min-h-[400px]">
+                    <video
+                      src={post.video_url}
+                      className="h-full w-full object-contain"
+                      controls
+                      playsInline
+                    />
+                  </div>
                 ) : null}
                 {showExternalVideo && post.video_url ? (
                   <a

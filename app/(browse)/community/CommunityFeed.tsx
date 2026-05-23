@@ -20,6 +20,7 @@ type Props = {
   initialPosts: PublicCommunityPost[];
   initialLastPage: number;
   initialRecentPosts: PublicCommunityPost[];
+  initialNewsItems?: PublicNewsItem[];
 };
 
 type PostsPayload = {
@@ -35,6 +36,7 @@ export default function CommunityFeed({
   initialPosts,
   initialLastPage,
   initialRecentPosts,
+  initialNewsItems = [],
 }: Props) {
   const searchParams = useSearchParams();
   const initialSection = communitySectionFromParam(searchParams.get("section"));
@@ -48,7 +50,7 @@ export default function CommunityFeed({
   const [loadingMore, setLoadingMore] = useState(false);
   const [postsError, setPostsError] = useState("");
 
-  const [newsItems, setNewsItems] = useState<PublicNewsItem[]>([]);
+  const [newsItems, setNewsItems] = useState<PublicNewsItem[]>(initialNewsItems);
   const [newsCountry, setNewsCountry] = useState("US");
   const [newsLoading, setNewsLoading] = useState(false);
   const [newsError, setNewsError] = useState("");

@@ -42,12 +42,48 @@ type LaravelPaginatedResponse<T> = {
   total: number;
 };
 
+function pickDiverseEbooksByCategory(
+  items: PublicLibraryItem[],
+  limit: number,
+): PublicLibraryItem[] {
+  const picked: PublicLibraryItem[] = [];
+  const seenCategories = new Set<string>();
+
+  for (const item of items) {
+    const categoryKey = item.category?.slug ?? item.category?.name ?? item.slug;
+    if (seenCategories.has(categoryKey)) {
+      continue;
+    }
+
+    seenCategories.add(categoryKey);
+    picked.push(item);
+
+    if (picked.length >= limit) {
+      return picked;
+    }
+  }
+
+  for (const item of items) {
+    if (picked.some((entry) => entry.slug === item.slug)) {
+      continue;
+    }
+
+    picked.push(item);
+
+    if (picked.length >= limit) {
+      break;
+    }
+  }
+
+  return picked;
+}
+
 export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryEbooks(
   limit = 6,
 ): Promise<PublicLibraryItem[]> {
   const params = new URLSearchParams({
     type: "ebook",
-    per_page: String(limit),
+    per_page: String(Math.max(limit * 4, 24)),
     page: "1",
   });
   const requestUrl = `${apiEndpoints.publicLibraryItems}?${params.toString()}`;
@@ -66,7 +102,7 @@ export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryE
     const payload =
       (await response.json()) as LaravelPaginatedResponse<PublicLibraryItem>;
 
-    return payload.data ?? [];
+    return pickDiverseEbooksByCategory(payload.data ?? [], limit);
   } catch {
     return [];
   }

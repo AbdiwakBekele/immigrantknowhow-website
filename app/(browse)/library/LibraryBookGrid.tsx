@@ -28,13 +28,13 @@ export default function LibraryBookGrid({ items }: { items: PublicLibraryItem[] 
           href={libraryItemPagePath(item.slug)}
           className="group flex h-full flex-col rounded-2xl border border-[#e8ecf4] bg-white p-4 shadow-[0_8px_26px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-[#2563eb] hover:shadow-[0_14px_30px_rgba(15,23,42,0.1)]"
         >
-          <div className="mb-3 h-40 w-full overflow-hidden rounded-xl">
+          <div className="mb-3 aspect-[2/3] w-full overflow-hidden rounded-xl bg-[#eef2ff]">
             {item.cover_image_url ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={item.cover_image_url}
                 alt={item.title}
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.02]"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#1d4ed8] via-[#2563eb] to-[#60a5fa]">

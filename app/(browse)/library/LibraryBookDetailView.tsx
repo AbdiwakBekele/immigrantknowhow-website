@@ -138,13 +138,13 @@ export default function LibraryBookDetailView({ item }: Props) {
       <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
         <div className="border-b border-slate-200 bg-gradient-to-r from-blue-50 via-white to-indigo-50 p-4 md:p-6">
           <div className="flex flex-col gap-6 md:flex-row md:items-start">
-            <div className="mx-auto h-56 w-40 shrink-0 overflow-hidden rounded-2xl shadow-md md:mx-0 md:h-64 md:w-44">
+            <div className="mx-auto aspect-[2/3] w-40 shrink-0 overflow-hidden rounded-2xl bg-[#eef2ff] shadow-md md:mx-0 md:w-44">
               {item.cover_image_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={item.cover_image_url}
                   alt={item.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#1d4ed8] via-[#2563eb] to-[#60a5fa]">

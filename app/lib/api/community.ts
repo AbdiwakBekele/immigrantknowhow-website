@@ -194,24 +194,39 @@ export async function fetchPublicCommunityNews(
     country,
     limit: String(limit),
   });
+  const requestUrl = `${apiEndpoints.publicCommunityNews}?${params.toString()}`;
 
   try {
-    const response = await fetch(
-      `${apiEndpoints.publicCommunityNews}?${params.toString()}`,
-      {
-        method: "GET",
-        headers: { Accept: "application/json" },
-        next: { revalidate: 600 },
-      },
-    );
+    const response = await fetch(requestUrl, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    });
 
     if (!response.ok) {
+      console.error("[CommunityNewsAPI] Non-OK response", {
+        url: requestUrl,
+        status: response.status,
+        statusText: response.statusText,
+      });
       return [];
     }
 
     const payload = (await response.json()) as CommunityNewsResponse;
+    if (payload.error) {
+      console.error("[CommunityNewsAPI] Hub returned error", {
+        url: requestUrl,
+        error: payload.error,
+        country: payload.country,
+      });
+    }
+
     return payload.items ?? [];
-  } catch {
+  } catch (error) {
+    console.error("[CommunityNewsAPI] Fetch failed", {
+      url: requestUrl,
+      error: error instanceof Error ? error.message : String(error),
+    });
     return [];
   }
 }

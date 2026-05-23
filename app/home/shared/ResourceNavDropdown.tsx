@@ -12,6 +12,8 @@ const resourceLinks = [
   { label: 'Articles', href: `${HOME_PAGE_PATH}#${IMMIGRANT_RESOURCES_SECTION_ID}` },
 ]
 
+const CLOSE_DELAY_MS = 150
+
 export default function ResourceNavDropdown({
   onLinkClick,
 }: {
@@ -19,6 +21,31 @@ export default function ResourceNavDropdown({
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+  }
+
+  const openMenu = () => {
+    clearCloseTimer()
+    setIsOpen(true)
+  }
+
+  const scheduleClose = () => {
+    clearCloseTimer()
+    closeTimerRef.current = setTimeout(() => {
+      setIsOpen(false)
+      closeTimerRef.current = null
+    }, CLOSE_DELAY_MS)
+  }
+
+  useEffect(() => {
+    return () => clearCloseTimer()
+  }, [])
 
   useEffect(() => {
     if (!isOpen) return
@@ -36,46 +63,51 @@ export default function ResourceNavDropdown({
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('click', handleOutsideClick)
     document.addEventListener('keydown', handleEscape)
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
+      document.removeEventListener('click', handleOutsideClick)
       document.removeEventListener('keydown', handleEscape)
     }
   }, [isOpen])
 
   const handleLinkClick = () => {
+    clearCloseTimer()
     setIsOpen(false)
     onLinkClick?.()
   }
 
   return (
-    <div className={`ikh-nav-dropdown ${isOpen ? 'is-open' : ''}`} ref={rootRef}>
+    <div
+      className={`ikh-nav-dropdown ${isOpen ? 'is-open' : ''}`}
+      ref={rootRef}
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
+    >
       <button
         className="ikh-nav-dropdown__trigger"
         type="button"
         aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-label="Resources menu"
-        onClick={(event) => {
-          event.stopPropagation()
-          setIsOpen((prev) => !prev)
-        }}
+        onClick={() => openMenu()}
       >
         Resources
       </button>
       <div className="ikh-nav-dropdown__menu" role="menu" aria-label="Resources links">
-        {resourceLinks.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            role="menuitem"
-            onClick={handleLinkClick}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <div className="ikh-nav-dropdown__menu-panel">
+          {resourceLinks.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              role="menuitem"
+              onClick={handleLinkClick}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )
