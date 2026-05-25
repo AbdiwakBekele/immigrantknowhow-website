@@ -65,11 +65,11 @@ export default function HomeHeader({
 
           <div className="ikh-header-actions">
             <a href={loginUrl} className="ikh-header-login">
-              Sign-in
+              I look for a service
             </a>
             <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-cta">
               <ArrowIcon />
-              <span>Become A Member</span>
+              <span>I&apos;m offering a Service</span>
             </a>
           </div>
 
@@ -105,11 +105,11 @@ export default function HomeHeader({
             Contact
           </Link>
           <a href={loginUrl} onClick={closeMobileNav} className="ikh-header-login">
-            Sign-in
+            I look for a service
           </a>
           <a href={joinUrl || HUB_REGISTER_URL} onClick={closeMobileNav} className="ikh-header-cta">
             <ArrowIcon />
-            <span>Become A Member</span>
+            <span>I&apos;m offering a Service</span>
           </a>
         </div>
       </nav>

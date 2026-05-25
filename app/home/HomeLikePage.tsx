@@ -93,11 +93,11 @@ export default function HomeLikePage(props: HomeLikePageProps) {
               <div className="ikh-hero__buttons">
                 <a href={HUB_PROVIDER_REGISTER_URL} className="ikh-button ikh-button--hero">
                   <CompassIcon />
-                  <span>Register As Provider</span>
+                  <span>I&apos;m offering a Service</span>
                 </a>
                 <a href={joinUrl} className="ikh-button ikh-button--hero">
                   <CompassIcon />
-                  <span>Join Now!</span>
+                  <span>I look for a service</span>
                 </a>
               </div>
 

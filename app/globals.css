@@ -268,10 +268,19 @@ summary {
   padding-bottom: 10px;
 }
 
-.ikh-mobile-nav__inner > a {
+.ikh-mobile-nav__inner>a {
   color: #000;
   font-size: 15px;
   line-height: 1.3;
+}
+
+.ikh-mobile-nav__inner .ikh-header-cta,
+.ikh-mobile-nav__inner .ikh-header-cta span {
+  color: #fff;
+}
+
+.ikh-mobile-nav__inner .ikh-header-cta .ikh-button__icon {
+  stroke: #fff;
 }
 
 .ikh-button--header {
@@ -531,13 +540,25 @@ summary {
 .ikh-ebooks-grid {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 1fr);
+  grid-auto-columns: minmax(260px, 280px);
   gap: 22px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 6px 4px 22px;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Home ebooks: keep each card the same size when only one is shown (no 1fr stretch) */
+.ikh-ebooks .ikh-ebooks-grid {
+  grid-auto-columns: 280px;
+}
+
+.ikh-ebooks .ikh-ebooks-card {
+  width: 280px;
+  max-width: 280px;
+  flex: 0 0 auto;
+  align-self: start;
 }
 
 .ikh-ebooks-grid::-webkit-scrollbar {
@@ -574,12 +595,18 @@ summary {
 
 .ikh-ebooks-card__media--contain {
   display: flex;
+  width: 100%;
   height: auto;
   aspect-ratio: 2 / 3;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   background-color: #eef2ff;
   background-image: none !important;
+}
+
+.ikh-ebooks .ikh-ebooks-card__media--contain {
+  max-height: 420px;
 }
 
 .ikh-ebooks-card__media--contain img {
@@ -1159,7 +1186,7 @@ summary {
   color: #111827;
 }
 
-.ikh-hero-search__field + .ikh-hero-search__field {
+.ikh-hero-search__field+.ikh-hero-search__field {
   border-left: 1px solid #e8edf5;
 }
 
@@ -1268,7 +1295,7 @@ summary {
   border: 0;
 }
 
-.ikh-provider-search__field + .ikh-provider-search__field {
+.ikh-provider-search__field+.ikh-provider-search__field {
   border-left: 1px solid #e8edf5;
 }
 
@@ -1345,8 +1372,7 @@ summary {
   background:
     linear-gradient(110deg, rgba(0, 0, 0, 0.84) 0%, rgba(0, 0, 0, 0.7) 46%, rgba(0, 0, 0, 0.45) 74%, rgba(0, 0, 0, 0.28) 100%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.3) 100%),
-    var(--ikh-country-hero-bg, url("/images/home/2025/07/Immigrant-Community-Bg.webp"))
-      center left / cover no-repeat;
+    var(--ikh-country-hero-bg, url("/images/home/2025/07/Immigrant-Community-Bg.webp")) center left / cover no-repeat;
 }
 
 .ikh-hero--country .ikh-hero__inner {
@@ -2233,7 +2259,7 @@ summary {
     url("/images/home/2025/07/We-Minimax-risk-of-chronic-loneliness.webp") center / cover no-repeat;
 }
 
-.ikh-loneliness-connection > .ikh-shell.ikh-loneliness-connection__inner {
+.ikh-loneliness-connection>.ikh-shell.ikh-loneliness-connection__inner {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -2298,7 +2324,7 @@ summary {
       url("/images/home/2025/07/We-Minimax-risk-of-chronic-loneliness.webp") 40% 25% / cover no-repeat;
   }
 
-  .ikh-loneliness-connection > .ikh-shell.ikh-loneliness-connection__inner {
+  .ikh-loneliness-connection>.ikh-shell.ikh-loneliness-connection__inner {
     min-height: 0;
     justify-content: center;
   }
@@ -3267,9 +3293,10 @@ summary {
 }
 
 @media (max-width: 767px) {
+
   .ikh-nav,
   .ikh-header-actions,
-  .ikh-header__inner > .ikh-button {
+  .ikh-header__inner>.ikh-button {
     display: none;
   }
 
@@ -3316,7 +3343,7 @@ summary {
     gap: 8px;
   }
 
-  .ikh-mobile-nav__inner > a {
+  .ikh-mobile-nav__inner>a {
     padding: 6px 0;
   }
 
@@ -3509,7 +3536,7 @@ summary {
     border-radius: 20px;
   }
 
-  .ikh-provider-search__field + .ikh-provider-search__field {
+  .ikh-provider-search__field+.ikh-provider-search__field {
     border-left: 0;
     border-top: 1px solid #e8edf5;
   }
@@ -3679,7 +3706,7 @@ summary {
     line-height: 1.1;
   }
 
-  .ikh-connection--forums .ikh-compare__content > p {
+  .ikh-connection--forums .ikh-compare__content>p {
     font-size: 18px;
   }
 
@@ -4116,6 +4143,124 @@ summary {
 .ikh-testimonial-dot[aria-pressed="true"] {
   background: #2563eb;
   transform: scale(1.2);
+}
+
+/* Home ebooks: same card size on mobile when count is 1 */
+@media (max-width: 767px) {
+  .ikh-ebooks .ikh-ebooks-grid {
+    grid-auto-columns: min(280px, 78vw);
+  }
+
+  .ikh-ebooks .ikh-ebooks-card {
+    width: min(280px, 78vw);
+    max-width: min(280px, 78vw);
+  }
+}
+
+/* Testimonials: full-width cards on small screens only */
+@media (max-width: 767px) {
+  .ikh-testimonials.ikh-section {
+    margin-top: 48px;
+    margin-bottom: 40px;
+    padding-inline: 8px;
+  }
+
+  .ikh-testimonials .ikh-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-inline: 16px !important;
+    box-sizing: border-box;
+  }
+
+  .ikh-testimonials .ikh-heading {
+    margin-bottom: 8px;
+  }
+
+  .ikh-testimonial-carousel {
+    width: calc(100% + 16px);
+    max-width: calc(100vw - 32px);
+    margin-top: 20px;
+    margin-inline: -8px;
+    padding-inline: 0;
+    box-sizing: border-box;
+  }
+
+  .ikh-testimonial-viewport {
+    width: 100%;
+    padding: 12px 0 10px !important;
+  }
+
+  .ikh-testimonial-page {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .ikh-testimonial-card {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto !important;
+    padding: 1.5rem 1.25rem 1.75rem !important;
+    box-sizing: border-box;
+  }
+
+  .ikh-testimonial-card::before {
+    top: 12px;
+    left: 1.5rem;
+    font-size: 3rem;
+  }
+
+  .ikh-testimonial-card::after {
+    top: 12px;
+    left: 12px;
+  }
+
+  .ikh-testimonial-card blockquote {
+    margin: 0;
+    padding: 3rem 1.5rem 0.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+
+  .ikh-testimonial-card blockquote strong,
+  .ikh-testimonial-card blockquote span {
+    display: block;
+    padding-inline: 0.25rem;
+  }
+
+  .ikh-testimonial-card blockquote strong {
+    margin-bottom: 0.75rem;
+  }
+
+  .ikh-testimonial-card blockquote span {
+    margin-top: 0.5rem;
+  }
+
+  .ikh-testimonial-card figcaption {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin-top: 1.5rem;
+    padding: 0 1.5rem 0.5rem;
+  }
+
+  .ikh-testimonial-arrow {
+    width: 2.125rem;
+    height: 2.125rem;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+  }
+
+  .ikh-testimonial-arrow--prev {
+    left: 0;
+  }
+
+  .ikh-testimonial-arrow--next {
+    right: 0;
+  }
+
+  .ikh-testimonial-dots {
+    margin-top: 1.25rem;
+  }
 }
 
 /* Final country-hero overrides (desktop only, kept last to win cascade) */
