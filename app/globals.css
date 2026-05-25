@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --ikh-header-height: 72px;
   --ikh-blue: #0f62fd;
   --ikh-black: #000000;
   --ikh-text: #0a0a0a;
@@ -47,8 +48,13 @@ summary {
 
 .ikh-page {
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   background: #fff;
+}
+
+.ikh-site {
+  min-height: 100vh;
 }
 
 .ikh-shell {
@@ -75,11 +81,12 @@ summary {
 .ikh-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 200;
   border-bottom: 1px solid rgba(231, 234, 240, 0.75);
-  background: rgba(255, 255, 255, 0.94);
+  background: #fff;
   padding: 0;
   backdrop-filter: blur(12px);
+  isolation: isolate;
 }
 
 .ikh-header__inner {
@@ -3302,10 +3309,40 @@ summary {
 
   .ikh-menu {
     display: block;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .ikh-site__content {
+    padding-top: var(--ikh-header-height);
+  }
+
+  .ikh-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    overflow: visible;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(231, 234, 240, 0.9);
+  }
+
+  .ikh-header--menu-open {
+    z-index: 1000;
   }
 
   .ikh-mobile-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 1001;
     display: none;
+    max-height: min(70vh, calc(100dvh - var(--ikh-header-height)));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .ikh-mobile-nav.is-open {
@@ -3313,7 +3350,6 @@ summary {
   }
 
   .ikh-page,
-  .ikh-header,
   .ikh-hero,
   .ikh-section,
   .ikh-welcome,
@@ -4177,27 +4213,38 @@ summary {
   }
 
   .ikh-testimonial-carousel {
-    width: calc(100% + 16px);
-    max-width: calc(100vw - 32px);
+    width: 100% !important;
+    max-width: 100% !important;
     margin-top: 20px;
-    margin-inline: -8px;
-    padding-inline: 0;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
     box-sizing: border-box;
   }
 
   .ikh-testimonial-viewport {
     width: 100%;
-    padding: 12px 0 10px !important;
+    padding: 12px 2.35rem 10px !important;
+    box-sizing: border-box;
+  }
+
+  .ikh-testimonial-track {
+    width: 100%;
   }
 
   .ikh-testimonial-page {
-    width: 100%;
-    min-width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
   }
 
   .ikh-testimonial-card {
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
     min-height: auto !important;
     padding: 1.5rem 1.25rem 1.75rem !important;
     box-sizing: border-box;
