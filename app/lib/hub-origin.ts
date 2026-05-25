@@ -1,5 +1,5 @@
 const productionHubUrl = 'https://hub.immigrantknowhow.com'
-const localHubUrl = 'http://immigrationknowhow.test'
+const localHubUrl = 'https://xftgjhk3pd.sharedwithexpose.com'
 
 /** Hub origin for API + auth links. Set NEXT_PUBLIC_HUB_ORIGIN or NEXT_PUBLIC_HUB_API_BASE_URL on the server. */
 export function getHubOrigin(): string {

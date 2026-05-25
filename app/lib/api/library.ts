@@ -83,6 +83,7 @@ export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryE
 ): Promise<PublicLibraryItem[]> {
   const params = new URLSearchParams({
     type: "ebook",
+    featured: "1",
     per_page: String(Math.max(limit * 4, 24)),
     page: "1",
   });
