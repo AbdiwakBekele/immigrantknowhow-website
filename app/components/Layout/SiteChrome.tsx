@@ -12,15 +12,15 @@ export default function SiteChrome({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="ikh-site">
       <HomeHeader
         joinUrl={joinUrl}
         loginUrl={loginUrl}
         logoSrc={SITE_LOGO_SRC}
       />
       <HomeHashScroll />
-      {children}
+      <div className="ikh-site__content">{children}</div>
       <HomeFooter />
-    </>
+    </div>
   );
 }

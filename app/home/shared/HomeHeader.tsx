@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState, type MouseEvent } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
 
 import { HUB_REGISTER_URL } from '@/app/lib/hub-links'
 import {
@@ -29,6 +29,28 @@ export default function HomeHeader({
 
   const closeMobileNav = () => setIsMobileNavOpen(false)
 
+  useEffect(() => {
+    if (!isMobileNavOpen) {
+      return
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeMobileNav()
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobileNavOpen])
+
   const handleServicesClick = (event: MouseEvent<HTMLAnchorElement>) => {
     closeMobileNav()
     event.preventDefault()
@@ -43,55 +65,54 @@ export default function HomeHeader({
   }
 
   return (
-    <>
-      <header className="ikh-header">
-        <div className="ikh-shell ikh-header__inner">
-          <Link href="/" className="ikh-logo-link" aria-label="Immigrant Knowhow home" onClick={closeMobileNav}>
-            <img src={logoSrc} alt="ImmigrantsKnowHow Logo" className="ikh-logo" />
+    <header className={`ikh-header ${isMobileNavOpen ? 'ikh-header--menu-open' : ''}`}>
+      <div className="ikh-shell ikh-header__inner">
+        <Link href="/" className="ikh-logo-link" aria-label="Immigrant Knowhow home" onClick={closeMobileNav}>
+          <img src={logoSrc} alt="ImmigrantsKnowHow Logo" className="ikh-logo" />
+        </Link>
+
+        <nav className="ikh-nav" aria-label="Primary navigation">
+          <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
+            Services
           </Link>
+          <ResourceNavDropdown onLinkClick={closeMobileNav} />
+          <Link href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
+            Community
+          </Link>
+          <Link href={CONTACT_PAGE_PATH} onClick={closeMobileNav}>
+            Contact
+          </Link>
+        </nav>
 
-          <nav className="ikh-nav" aria-label="Primary navigation">
-            <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
-              Services
-            </Link>
-            <ResourceNavDropdown onLinkClick={closeMobileNav} />
-            <Link href={COMMUNITY_PAGE_PATH} onClick={closeMobileNav}>
-              Community
-            </Link>
-            <Link href={CONTACT_PAGE_PATH} onClick={closeMobileNav}>
-              Contact
-            </Link>
-          </nav>
-
-          <div className="ikh-header-actions">
-            <a href={loginUrl} className="ikh-header-login">
-              I look for a service
-            </a>
-            <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-cta">
-              <ArrowIcon />
-              <span>I&apos;m offering a Service</span>
-            </a>
-          </div>
-
-          <button
-            className="ikh-menu"
-            aria-label="Menu"
-            aria-expanded={isMobileNavOpen}
-            aria-controls="ikh-mobile-nav"
-            type="button"
-            onClick={() => setIsMobileNavOpen((prev) => !prev)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+        <div className="ikh-header-actions">
+          <a href={loginUrl} className="ikh-header-login">
+            I look for a service
+          </a>
+          <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-cta">
+            <ArrowIcon />
+            <span>I&apos;m offering a Service</span>
+          </a>
         </div>
-      </header>
+
+        <button
+          className="ikh-menu"
+          aria-label="Menu"
+          aria-expanded={isMobileNavOpen}
+          aria-controls="ikh-mobile-nav"
+          type="button"
+          onClick={() => setIsMobileNavOpen((prev) => !prev)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
 
       <nav
         id="ikh-mobile-nav"
         className={`ikh-mobile-nav ${isMobileNavOpen ? 'is-open' : ''}`}
         aria-label="Mobile navigation"
+        aria-hidden={!isMobileNavOpen}
       >
         <div className="ikh-shell ikh-mobile-nav__inner">
           <Link href={SERVICES_SECTION_PATH} onClick={handleServicesClick}>
@@ -113,6 +134,6 @@ export default function HomeHeader({
           </a>
         </div>
       </nav>
-    </>
+    </header>
   )
 }

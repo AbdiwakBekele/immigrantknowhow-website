@@ -40,7 +40,7 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
 
   useEffect(() => {
     const updateItemsPerPage = (width: number) => {
-      setItemsPerPage(width < 680 ? 1 : 3)
+      setItemsPerPage(width < 768 ? 1 : 3)
     }
 
     if (!carouselRef.current) {
