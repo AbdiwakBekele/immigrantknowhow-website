@@ -549,6 +549,7 @@ summary {
   grid-auto-flow: column;
   grid-auto-columns: minmax(260px, 280px);
   gap: 22px;
+  align-items: stretch;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 6px 4px 22px;
@@ -556,16 +557,63 @@ summary {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Home ebooks: keep each card the same size when only one is shown (no 1fr stretch) */
+/* Home ebooks: horizontal flex row — equal card heights (stretch) */
 .ikh-ebooks .ikh-ebooks-grid {
-  grid-auto-columns: 280px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 22px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 4px 22px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ikh-ebooks .ikh-ebooks-card {
+  display: flex;
+  flex: 0 0 280px;
+  flex-direction: column;
+  box-sizing: border-box;
   width: 280px;
+  min-width: 280px;
   max-width: 280px;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.ikh-ebooks .ikh-ebooks-card__media--contain {
   flex: 0 0 auto;
-  align-self: start;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  max-height: 420px;
+}
+
+.ikh-ebooks .ikh-ebooks-card__body {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.ikh-ebooks .ikh-ebooks-card__body h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.ikh-ebooks .ikh-ebooks-card__body p {
+  margin-bottom: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .ikh-ebooks-grid::-webkit-scrollbar {
@@ -610,10 +658,6 @@ summary {
   justify-content: center;
   background-color: #eef2ff;
   background-image: none !important;
-}
-
-.ikh-ebooks .ikh-ebooks-card__media--contain {
-  max-height: 420px;
 }
 
 .ikh-ebooks-card__media--contain img {
@@ -4037,11 +4081,13 @@ summary {
 /* Home ebooks: same card size on mobile when count is 1 */
 @media (max-width: 767px) {
   .ikh-ebooks .ikh-ebooks-grid {
-    grid-auto-columns: min(280px, 78vw);
+    gap: 18px;
   }
 
   .ikh-ebooks .ikh-ebooks-card {
+    flex: 0 0 min(280px, 78vw);
     width: min(280px, 78vw);
+    min-width: min(280px, 78vw);
     max-width: min(280px, 78vw);
   }
 }
