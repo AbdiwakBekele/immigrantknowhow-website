@@ -128,12 +128,10 @@ export const testimonials = [
   },
 ]
 
-export const testimonialCards = Array.from({ length: 3 }, (_, groupIndex) =>
-  testimonials.map((item, itemIndex) => ({
-    ...item,
-    id: `${groupIndex}-${itemIndex}-${item.author}`,
-  })),
-).flat()
+export const testimonialCards = testimonials.map((item, index) => ({
+  ...item,
+  id: `${index}-${item.author}`,
+}))
 
 export const faqs = [
   {
