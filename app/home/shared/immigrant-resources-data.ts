@@ -1,4 +1,4 @@
-import type { PublicNewsItem } from '@/app/lib/api/community'
+import type { PublicCommunityPost, PublicNewsItem } from '@/app/lib/api/community'
 
 const asset = (file: string) => `/images/home/2025/immigrant-resources/${file}`
 
@@ -35,6 +35,26 @@ export const VIDEO_CARD_IMAGES_REMOTE = [
 export const IMMIGRANT_RESOURCES_SECTION_ID = 'immigrant-resources'
 
 export const RESOURCE_CAROUSEL_LIMIT = 6
+
+export const HOME_FEATURED_VIDEO_URL = 'https://youtu.be/4k15Lxz3rc8'
+
+export const HOME_FEATURED_VIDEO_POST: PublicCommunityPost = {
+  id: -1,
+  title: 'Learn more about immigrantknowhow.com',
+  description: 'Watch this introduction to Immigrant Know How.',
+  tag: null,
+  category: 'feed',
+  contributor_name: 'Immigrant Know How',
+  contributor_country: null,
+  image_url: 'https://i.ytimg.com/vi/4k15Lxz3rc8/hqdefault.jpg',
+  video_url: HOME_FEATURED_VIDEO_URL,
+  likes_count: 0,
+  comments_count: 0,
+  shares_count: 0,
+  bookmarks_count: 0,
+  user_reactions: [],
+  created_at: null,
+}
 
 /** Design mockup copy — used when shaping summaries to match card height. */
 export const ARTICLE_SUMMARY_MAX_CHARS = 95
