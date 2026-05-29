@@ -11,6 +11,23 @@ export const CONTACT_PAGE_PATH = "/contact";
 export const TERMS_PAGE_PATH = "/terms";
 export const PRIVACY_PAGE_PATH = "/privacy";
 
+export type LibrarySearchParams = {
+  search?: string;
+  page?: string;
+};
+
+export function librarySearchPath(params?: LibrarySearchParams): string {
+  const search = new URLSearchParams();
+  if (params?.search?.trim()) {
+    search.set("search", params.search.trim());
+  }
+  if (params?.page?.trim()) {
+    search.set("page", params.page.trim());
+  }
+  const query = search.toString();
+  return query ? `${LIBRARY_PAGE_PATH}?${query}` : LIBRARY_PAGE_PATH;
+}
+
 export type ProviderSearchParams = {
   service_type?: string;
   location?: string;

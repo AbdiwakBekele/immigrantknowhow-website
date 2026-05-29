@@ -42,6 +42,34 @@ type LaravelPaginatedResponse<T> = {
   total: number;
 };
 
+export type PublicLibraryItemsPage = {
+  items: PublicLibraryItem[];
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+};
+
+export type PublicLibraryItemsParams = {
+  search?: string;
+  page?: number;
+  perPage?: number;
+};
+
+function emptyLibraryItemsPage(
+  page: number,
+  perPage: number,
+  items: PublicLibraryItem[] = [],
+): PublicLibraryItemsPage {
+  return {
+    items,
+    currentPage: page,
+    lastPage: 1,
+    perPage,
+    total: items.length,
+  };
+}
+
 function pickDiverseEbooksByCategory(
   items: PublicLibraryItem[],
   limit: number,
@@ -109,8 +137,21 @@ export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryE
   }
 });
 
-export async function fetchPublicLibraryItems(): Promise<PublicLibraryItem[]> {
-  const requestUrl = `${apiEndpoints.publicLibraryItems}?per_page=24`;
+export async function fetchPublicLibraryItems(
+  params: PublicLibraryItemsParams = {},
+): Promise<PublicLibraryItemsPage> {
+  const page = Math.max(1, params.page ?? 1);
+  const perPage = Math.min(50, Math.max(1, params.perPage ?? 20));
+  const requestParams = new URLSearchParams({
+    per_page: String(perPage),
+    page: String(page),
+  });
+
+  if (params.search?.trim()) {
+    requestParams.set("search", params.search.trim());
+  }
+
+  const requestUrl = `${apiEndpoints.publicLibraryItems}?${requestParams.toString()}`;
 
   try {
     console.log("[LibraryAPI] Fetch started", {
@@ -134,7 +175,7 @@ export async function fetchPublicLibraryItems(): Promise<PublicLibraryItem[]> {
       });
 
       // Keep the public page available even when backend endpoint is not deployed yet.
-      return [];
+      return emptyLibraryItemsPage(page, perPage);
     }
 
     const payload =
@@ -148,7 +189,13 @@ export async function fetchPublicLibraryItems(): Promise<PublicLibraryItem[]> {
       total: payload.total,
     });
 
-    return payload.data ?? [];
+    return {
+      items: payload.data ?? [],
+      currentPage: payload.current_page ?? page,
+      lastPage: payload.last_page ?? 1,
+      perPage: payload.per_page ?? perPage,
+      total: payload.total ?? payload.data?.length ?? 0,
+    };
   } catch (error) {
     const errorDetails =
       error instanceof Error
@@ -171,7 +218,7 @@ export async function fetchPublicLibraryItems(): Promise<PublicLibraryItem[]> {
       error: errorDetails,
     });
 
-    return [];
+    return emptyLibraryItemsPage(page, perPage);
   }
 }
 
