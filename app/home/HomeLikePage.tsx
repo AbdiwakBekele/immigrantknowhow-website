@@ -97,7 +97,7 @@ export default function HomeLikePage(props: HomeLikePageProps) {
                 </a>
                 <a href={joinUrl} className="ikh-button ikh-button--hero">
                   <CompassIcon />
-                  <span>I look for a service</span>
+                  <span>I am looking for service.</span>
                 </a>
               </div>
 
