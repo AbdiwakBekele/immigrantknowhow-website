@@ -31,6 +31,9 @@ export const HUB_COMMUNITY_URL = `${HUB_ORIGIN}/community`
 
 export const MEMBER_CTA_LABEL = 'Become A Member'
 
+export const HERO_OFFERING_SERVICE_LABEL = "I'm Offering a Service"
+export const HERO_LOOKING_SERVICE_LABEL = "I'm Looking for a Service"
+
 /** Hub book detail page (public; purchase still requires sign-in). */
 export function hubLibraryItemUrl(slug: string): string {
   return `${HUB_ORIGIN}/library/${encodeURIComponent(slug)}`
