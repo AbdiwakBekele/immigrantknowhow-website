@@ -4,7 +4,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, type MouseEvent } from 'react'
 
-import { HUB_REGISTER_URL } from '@/app/lib/hub-links'
+import {
+  HERO_LOOKING_SERVICE_LABEL,
+  HERO_OFFERING_SERVICE_LABEL,
+  HUB_REGISTER_URL,
+} from '@/app/lib/hub-links'
 import {
   scrollToServicesSection,
   hasServicesSectionOnPage,
@@ -13,7 +17,7 @@ import {
 import { COMMUNITY_PAGE_PATH, CONTACT_PAGE_PATH } from '@/app/lib/site-links'
 
 import ResourceNavDropdown from './ResourceNavDropdown'
-import { ArrowIcon } from './ui'
+import { CompassIcon } from './ui'
 
 export default function HomeHeader({
   joinUrl,
@@ -86,11 +90,12 @@ export default function HomeHeader({
 
         <div className="ikh-header-actions">
           <a href={loginUrl} className="ikh-header-login">
-            I am looking for service.
+            <CompassIcon />
+            <span>{HERO_LOOKING_SERVICE_LABEL}</span>
           </a>
           <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-cta">
-            <ArrowIcon />
-            <span>I&apos;m offering a Service</span>
+            <CompassIcon />
+            <span>{HERO_OFFERING_SERVICE_LABEL}</span>
           </a>
         </div>
 
@@ -126,11 +131,12 @@ export default function HomeHeader({
             Contact
           </Link>
           <a href={loginUrl} onClick={closeMobileNav} className="ikh-header-login">
-            I am looking for service.
+            <CompassIcon />
+            <span>{HERO_LOOKING_SERVICE_LABEL}</span>
           </a>
           <a href={joinUrl || HUB_REGISTER_URL} onClick={closeMobileNav} className="ikh-header-cta">
-            <ArrowIcon />
-            <span>I&apos;m offering a Service</span>
+            <CompassIcon />
+            <span>{HERO_OFFERING_SERVICE_LABEL}</span>
           </a>
         </div>
       </nav>

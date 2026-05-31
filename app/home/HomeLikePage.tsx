@@ -32,7 +32,11 @@ import {
 } from './shared/shared-sections'
 import HeroSearchPanel from './shared/HeroSearchPanel'
 import { CheckIcon, CompassIcon, SectionActions, TrustNote } from './shared/ui'
-import { HUB_PROVIDER_REGISTER_URL } from '@/app/lib/hub-links'
+import {
+  HERO_LOOKING_SERVICE_LABEL,
+  HERO_OFFERING_SERVICE_LABEL,
+  HUB_PROVIDER_REGISTER_URL,
+} from '@/app/lib/hub-links'
 
 const asset = (path: string) => `/images/home/${path}`
 
@@ -93,11 +97,11 @@ export default function HomeLikePage(props: HomeLikePageProps) {
               <div className="ikh-hero__buttons">
                 <a href={HUB_PROVIDER_REGISTER_URL} className="ikh-button ikh-button--hero">
                   <CompassIcon />
-                  <span>I&apos;m offering a Service</span>
+                  <span>{HERO_OFFERING_SERVICE_LABEL}</span>
                 </a>
                 <a href={joinUrl} className="ikh-button ikh-button--hero">
                   <CompassIcon />
-                  <span>I am looking for service.</span>
+                  <span>{HERO_LOOKING_SERVICE_LABEL}</span>
                 </a>
               </div>
 

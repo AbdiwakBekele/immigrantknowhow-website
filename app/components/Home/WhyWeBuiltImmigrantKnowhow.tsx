@@ -1,5 +1,8 @@
-import Image from "next/image";
 import MemberCTABlock from "./MemberCTABlock";
+import { HOME_FEATURED_VIDEO_URL } from "@/app/home/shared/immigrant-resources-data";
+import { youtubeVideoIdFromUrl } from "@/app/(browse)/community/community-utils";
+
+const videoId = youtubeVideoIdFromUrl(HOME_FEATURED_VIDEO_URL);
 
 export default function WhyWeBuiltImmigrantKnowhow() {
   return (
@@ -13,16 +16,17 @@ export default function WhyWeBuiltImmigrantKnowhow() {
           to turn struggle into support, and isolation into connection.
         </p>
 
-        <div className="mx-auto mt-5 max-w-[900px] sm:mt-12 lg:mt-5">
-          <Image
-            src="/Canada-1-1.webp"
-            alt="Calgary skyline and city view"
-            width={1200}
-            height={675}
-            className="h-auto w-full rounded-2xl object-cover shadow-[0_12px_40px_rgba(0,0,0,0.1)]"
-            sizes="(min-width: 1024px) 900px, 90vw"
-          />
-        </div>
+        {videoId ? (
+          <div className="ikh-video mx-auto mt-5 sm:mt-12 lg:mt-5">
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title="Why We Built Immigrant Knowhow"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        ) : null}
 
         <div className="mx-auto mt-12 flex max-w-md flex-col items-center sm:mt-14 lg:mt-5">
           <MemberCTABlock align="center" />
