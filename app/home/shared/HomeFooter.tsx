@@ -136,7 +136,7 @@ export default function HomeFooter() {
         <div className="ikh-footer__bottom">
           <p className="ikh-footer__copyright">© {year} Immigrant Knowhow. All rights reserved.</p>
           <div className="ikh-footer__legal">
-            <Link href="/terms">Terms</Link>
+            <Link href="/terms-of-use">Terms</Link>
             <Link href="/privacy">Privacy</Link>
           </div>
         </div>
