@@ -6,6 +6,7 @@ import {
   PRIVACY_LAST_UPDATED,
   PRIVACY_POLICY_BODY,
 } from "@/app/lib/legal/privacy-policy";
+import { WEB_TERMS_PAGE_PATH } from "@/app/lib/site-links";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Immigrant Knowhow",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const { nodes, headings } = parsePrivacyContent(PRIVACY_POLICY_BODY);
 
 const legalTabs = [
-  { href: "/terms", label: "Terms of Use" },
+  { href: WEB_TERMS_PAGE_PATH, label: "Terms of Use" },
   { href: "/privacy", label: "Privacy Policy", active: true },
 ];
 

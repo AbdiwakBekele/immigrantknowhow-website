@@ -8,7 +8,12 @@ export const DV_LOTTERY_PAGE_PATH = "/dv-lottery";
 export const COMMUNITY_PAGE_PATH = "/community";
 export const PROVIDERS_PAGE_PATH = "/providers";
 export const CONTACT_PAGE_PATH = "/contact";
+/** App Store EULA route — redirects to Apple's Standard EULA. */
 export const TERMS_PAGE_PATH = "/terms";
+export const APPLE_STANDARD_EULA_URL =
+  "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/";
+/** Website terms of use (marketing site content). */
+export const WEB_TERMS_PAGE_PATH = "/terms-of-use";
 export const PRIVACY_PAGE_PATH = "/privacy";
 
 export type LibrarySearchParams = {
