@@ -4,6 +4,8 @@ import type { PublicLibraryItem } from "@/app/lib/api/library";
 import { HUB_REGISTER_URL } from "@/app/lib/hub-links";
 import { LIBRARY_PAGE_PATH } from "@/app/lib/site-links";
 
+import LibraryAiSummarySection from "./LibraryAiSummarySection";
+
 function formatPrice(item: PublicLibraryItem): string {
   if (item.is_premium && item.price) {
     return `${item.price.toFixed(2)} ${item.currency ?? "USD"}`;
@@ -183,6 +185,10 @@ export default function LibraryBookDetailView({ item }: Props) {
                 {item.description}
               </p>
             </div>
+          ) : null}
+
+          {item.type === "ebook" ? (
+            <LibraryAiSummarySection slug={item.slug} initialSummary={item.ai_summary} />
           ) : null}
 
           {metadataFacts.length > 0 ? (
