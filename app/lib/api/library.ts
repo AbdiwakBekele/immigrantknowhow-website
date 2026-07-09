@@ -28,6 +28,7 @@ export type PublicLibraryItem = {
   narrator?: string | null;
   difficulty_level?: string | null;
   recommended_age_group?: string | null;
+  ai_summary?: string | null;
 };
 
 type PublicLibraryItemResponse = {
