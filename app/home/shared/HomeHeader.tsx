@@ -7,6 +7,7 @@ import { useEffect, useState, type MouseEvent } from 'react'
 import {
   HERO_LOOKING_SERVICE_LABEL,
   HERO_OFFERING_SERVICE_LABEL,
+  HUB_PROVIDER_REGISTER_URL,
   HUB_REGISTER_URL,
 } from '@/app/lib/hub-links'
 import {
@@ -89,13 +90,16 @@ export default function HomeHeader({
         </nav>
 
         <div className="ikh-header-actions">
-          <a href={loginUrl} className="ikh-header-login">
+          <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-login">
             <CompassIcon />
             <span>{HERO_LOOKING_SERVICE_LABEL}</span>
           </a>
-          <a href={joinUrl || HUB_REGISTER_URL} className="ikh-header-cta">
+          <a href={HUB_PROVIDER_REGISTER_URL} className="ikh-header-cta">
             <CompassIcon />
             <span>{HERO_OFFERING_SERVICE_LABEL}</span>
+          </a>
+          <a href={loginUrl} className="ikh-header-login">
+            <span>Sign In</span>
           </a>
         </div>
 
@@ -130,13 +134,16 @@ export default function HomeHeader({
           <Link href={CONTACT_PAGE_PATH} onClick={closeMobileNav}>
             Contact
           </Link>
-          <a href={loginUrl} onClick={closeMobileNav} className="ikh-header-login">
+          <a href={joinUrl || HUB_REGISTER_URL} onClick={closeMobileNav} className="ikh-header-login">
             <CompassIcon />
             <span>{HERO_LOOKING_SERVICE_LABEL}</span>
           </a>
-          <a href={joinUrl || HUB_REGISTER_URL} onClick={closeMobileNav} className="ikh-header-cta">
+          <a href={HUB_PROVIDER_REGISTER_URL} onClick={closeMobileNav} className="ikh-header-cta">
             <CompassIcon />
             <span>{HERO_OFFERING_SERVICE_LABEL}</span>
+          </a>
+          <a href={loginUrl} onClick={closeMobileNav} className="ikh-header-login">
+            <span>Sign In</span>
           </a>
         </div>
       </nav>
