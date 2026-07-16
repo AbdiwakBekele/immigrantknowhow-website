@@ -15,6 +15,13 @@ export async function POST(request: Request): Promise<Response> {
   const stripeSignature = request.headers.get('stripe-signature') ?? ''
   const contentType = request.headers.get('content-type') ?? 'application/json'
 
+  if (!stripeSignature) {
+    return new Response('Missing Stripe-Signature header', {
+      status: 400,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+    })
+  }
+
   let upstream: Response
   try {
     upstream = await fetch(target, {
@@ -26,11 +33,20 @@ export async function POST(request: Request): Promise<Response> {
       },
       body: rawBody,
       cache: 'no-store',
+      redirect: 'manual',
     })
   } catch {
     return new Response('Webhook upstream unavailable', {
       status: 502,
-      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+    })
+  }
+
+  // Do not follow redirects — Stripe must receive the hub status directly.
+  if (upstream.status >= 300 && upstream.status < 400) {
+    return new Response('Webhook upstream redirected unexpectedly', {
+      status: 502,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
     })
   }
 
