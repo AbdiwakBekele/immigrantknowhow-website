@@ -62,7 +62,7 @@ export default function LibraryBookGrid({
                 href={libraryItemPagePath(item.slug)}
                 className="group flex h-full flex-col rounded-2xl border border-[#e8ecf4] bg-white p-4 shadow-[0_8px_26px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-[#2563eb] hover:shadow-[0_14px_30px_rgba(15,23,42,0.1)]"
               >
-                <div className="mb-3 aspect-[2/3] w-full overflow-hidden rounded-xl bg-[#eef2ff]">
+                <div className="relative mb-3 aspect-[2/3] w-full overflow-hidden rounded-xl bg-[#eef2ff]">
                   {item.cover_image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -77,6 +77,11 @@ export default function LibraryBookGrid({
                       </span>
                     </div>
                   )}
+                  {item.is_featured ? (
+                    <span className="absolute left-3 top-3 rounded-full bg-[#fef3c7] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#b45309]">
+                      Featured
+                    </span>
+                  ) : null}
                 </div>
 
                 <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#2563eb]">

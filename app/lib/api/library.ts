@@ -15,6 +15,7 @@ export type PublicLibraryItem = {
   category: LibraryCategory | null;
   cover_image_url: string | null;
   is_premium: boolean;
+  is_featured?: boolean;
   price: number | null;
   currency: string | null;
   page_count?: number | null;
@@ -69,6 +70,10 @@ function emptyLibraryItemsPage(
     perPage,
     total: items.length,
   };
+}
+
+function sortFeaturedFirst(items: PublicLibraryItem[]): PublicLibraryItem[] {
+  return [...items].sort((a, b) => Number(Boolean(b.is_featured)) - Number(Boolean(a.is_featured)));
 }
 
 function pickDiverseEbooksByCategory(
@@ -191,7 +196,7 @@ export async function fetchPublicLibraryItems(
     });
 
     return {
-      items: payload.data ?? [],
+      items: sortFeaturedFirst(payload.data ?? []),
       currentPage: payload.current_page ?? page,
       lastPage: payload.last_page ?? 1,
       perPage: payload.per_page ?? perPage,
