@@ -18,6 +18,7 @@ type LibraryBookGridProps = {
   lastPage: number;
   perPage: number;
   total: number;
+  featuredTotal?: number;
 };
 
 export default function LibraryBookGrid({
@@ -27,8 +28,14 @@ export default function LibraryBookGrid({
   lastPage,
   perPage,
   total,
+  featuredTotal = 0,
 }: LibraryBookGridProps) {
-  const firstItemNumber = total > 0 ? (currentPage - 1) * perPage + 1 : 0;
+  const firstItemNumber =
+    total > 0
+      ? currentPage === 1
+        ? 1
+        : featuredTotal + (currentPage - 1) * perPage + 1
+      : 0;
   const lastItemNumber = firstItemNumber + items.length - 1;
   const prevHref =
     currentPage > 1

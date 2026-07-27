@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import SitePage from "@/app/components/Layout/SitePage";
-import { fetchPublicLibraryItems } from "@/app/lib/api/library";
+import { fetchPublicLibraryCatalog } from "@/app/lib/api/library";
 
 import LibraryBookGrid from "./LibraryBookGrid";
 import LibrarySearchField from "./LibrarySearchField";
@@ -24,7 +24,7 @@ export default async function PublicLibraryPage({ searchParams }: PublicLibraryP
   const params = await searchParams;
   const search = params.search?.trim() ?? "";
   const page = Math.max(1, Number.parseInt(params.page ?? "1", 10) || 1);
-  const result = await fetchPublicLibraryItems({
+  const result = await fetchPublicLibraryCatalog({
     search: search || undefined,
     page,
     perPage: 20,
@@ -50,6 +50,7 @@ export default async function PublicLibraryPage({ searchParams }: PublicLibraryP
         lastPage={result.lastPage}
         perPage={result.perPage}
         total={result.total}
+        featuredTotal={result.featuredTotal}
       />
     </SitePage>
   );
