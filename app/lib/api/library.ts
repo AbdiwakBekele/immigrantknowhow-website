@@ -50,12 +50,19 @@ export type PublicLibraryItemsPage = {
   lastPage: number;
   perPage: number;
   total: number;
+  /** Featured titles included in `items` (page 1 only). */
+  featuredCount?: number;
+  /** Total featured matching the current search. */
+  featuredTotal?: number;
 };
 
 export type PublicLibraryItemsParams = {
   search?: string;
   page?: number;
   perPage?: number;
+  /** When set, filter to featured (`true`) or non-featured (`false`) only. */
+  featured?: boolean;
+  type?: string;
 };
 
 function emptyLibraryItemsPage(
@@ -147,7 +154,7 @@ export async function fetchPublicLibraryItems(
   params: PublicLibraryItemsParams = {},
 ): Promise<PublicLibraryItemsPage> {
   const page = Math.max(1, params.page ?? 1);
-  const perPage = Math.min(50, Math.max(1, params.perPage ?? 20));
+  const perPage = Math.min(100, Math.max(1, params.perPage ?? 20));
   const requestParams = new URLSearchParams({
     per_page: String(perPage),
     page: String(page),
@@ -155,6 +162,14 @@ export async function fetchPublicLibraryItems(
 
   if (params.search?.trim()) {
     requestParams.set("search", params.search.trim());
+  }
+
+  if (typeof params.featured === "boolean") {
+    requestParams.set("featured", params.featured ? "1" : "0");
+  }
+
+  if (params.type?.trim()) {
+    requestParams.set("type", params.type.trim());
   }
 
   const requestUrl = `${apiEndpoints.publicLibraryItems}?${requestParams.toString()}`;
@@ -195,8 +210,11 @@ export async function fetchPublicLibraryItems(
       total: payload.total,
     });
 
+    const items = payload.data ?? [];
+
     return {
-      items: sortFeaturedFirst(payload.data ?? []),
+      items:
+        typeof params.featured === "boolean" ? items : sortFeaturedFirst(items),
       currentPage: payload.current_page ?? page,
       lastPage: payload.last_page ?? 1,
       perPage: payload.per_page ?? perPage,
@@ -226,6 +244,48 @@ export async function fetchPublicLibraryItems(
 
     return emptyLibraryItemsPage(page, perPage);
   }
+}
+
+/**
+ * Catalog listing with every featured title pinned above non-featured results.
+ * Featured books are loaded in full on page 1 (not limited to the page size).
+ */
+export async function fetchPublicLibraryCatalog(
+  params: PublicLibraryItemsParams = {},
+): Promise<PublicLibraryItemsPage> {
+  const page = Math.max(1, params.page ?? 1);
+  const perPage = Math.min(50, Math.max(1, params.perPage ?? 20));
+  const search = params.search?.trim() || undefined;
+
+  const [featuredPage, regularPage] = await Promise.all([
+    fetchPublicLibraryItems({
+      search,
+      featured: true,
+      perPage: 100,
+      page: 1,
+    }),
+    fetchPublicLibraryItems({
+      search,
+      featured: false,
+      perPage,
+      page,
+    }),
+  ]);
+
+  const featuredItems =
+    page === 1
+      ? featuredPage.items.map((item) => ({ ...item, is_featured: true }))
+      : [];
+
+  return {
+    items: [...featuredItems, ...regularPage.items],
+    currentPage: regularPage.currentPage,
+    lastPage: Math.max(1, regularPage.lastPage),
+    perPage: regularPage.perPage,
+    total: featuredPage.total + regularPage.total,
+    featuredCount: featuredItems.length,
+    featuredTotal: featuredPage.total,
+  };
 }
 
 function normalizeSlug(slug: string): string {
