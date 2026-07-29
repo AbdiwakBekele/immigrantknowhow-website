@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 export default async function HomePage() {
   const [serviceTypes, ebooks, newsArticles, videoPosts] = await Promise.all([
     fetchPublicServiceTypes(100),
-    fetchPublicLibraryEbooks(6),
+    fetchPublicLibraryEbooks(24),
     fetchPublicCommunityNews('US', RESOURCE_CAROUSEL_LIMIT),
     fetchPublicCommunityVideos(RESOURCE_CAROUSEL_LIMIT),
   ])
