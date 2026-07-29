@@ -83,54 +83,20 @@ function sortFeaturedFirst(items: PublicLibraryItem[]): PublicLibraryItem[] {
   return [...items].sort((a, b) => Number(Boolean(b.is_featured)) - Number(Boolean(a.is_featured)));
 }
 
-function pickDiverseEbooksByCategory(
-  items: PublicLibraryItem[],
-  limit: number,
-): PublicLibraryItem[] {
-  const picked: PublicLibraryItem[] = [];
-  const seenCategories = new Set<string>();
-
-  for (const item of items) {
-    const categoryKey = item.category?.slug ?? item.category?.name ?? item.slug;
-    if (seenCategories.has(categoryKey)) {
-      continue;
-    }
-
-    seenCategories.add(categoryKey);
-    picked.push(item);
-
-    if (picked.length >= limit) {
-      return picked;
-    }
-  }
-
-  for (const item of items) {
-    if (picked.some((entry) => entry.slug === item.slug)) {
-      continue;
-    }
-
-    picked.push(item);
-
-    if (picked.length >= limit) {
-      break;
-    }
-  }
-
-  return picked;
-}
-
 export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryEbooks(
-  limit = 6,
+  limit = 24,
 ): Promise<PublicLibraryItem[]> {
-  const params = new URLSearchParams({
-    type: "ebook",
-    featured: "1",
-    per_page: String(Math.max(limit * 4, 24)),
-    page: "1",
-  });
-  const requestUrl = `${apiEndpoints.publicLibraryItems}?${params.toString()}`;
+  const requestLimit = Math.min(100, Math.max(limit, 1));
 
-  try {
+  async function fetchEbooks(extra: Record<string, string>): Promise<PublicLibraryItem[]> {
+    const params = new URLSearchParams({
+      type: "ebook",
+      per_page: String(requestLimit),
+      page: "1",
+      ...extra,
+    });
+    const requestUrl = `${apiEndpoints.publicLibraryItems}?${params.toString()}`;
+
     const response = await fetch(requestUrl, {
       method: "GET",
       headers: { Accept: "application/json" },
@@ -144,7 +110,28 @@ export const fetchPublicLibraryEbooks = cache(async function fetchPublicLibraryE
     const payload =
       (await response.json()) as LaravelPaginatedResponse<PublicLibraryItem>;
 
-    return pickDiverseEbooksByCategory(payload.data ?? [], limit);
+    return payload.data ?? [];
+  }
+
+  try {
+    const featured = await fetchEbooks({ featured: "1" });
+    if (featured.length > 0) {
+      return featured
+        .map((item) => ({ ...item, is_featured: true }))
+        .slice(0, requestLimit);
+    }
+
+    // Fallback if the featured filter is unavailable: prefer items flagged featured.
+    const allEbooks = await fetchEbooks({});
+    const featuredFromList = sortFeaturedFirst(allEbooks).filter(
+      (item) => item.is_featured,
+    );
+
+    if (featuredFromList.length > 0) {
+      return featuredFromList.slice(0, requestLimit);
+    }
+
+    return sortFeaturedFirst(allEbooks).slice(0, requestLimit);
   } catch {
     return [];
   }

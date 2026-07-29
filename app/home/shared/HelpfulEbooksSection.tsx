@@ -13,7 +13,7 @@ export default function HelpfulEbooksSection({
 }: {
   ebooks?: PublicLibraryItem[]
 }) {
-  const items = (ebooks ?? []).slice(0, 6)
+  const items = ebooks ?? []
 
   if (items.length === 0) {
     return null
