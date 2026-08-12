@@ -21,6 +21,7 @@ import {
   SOCIAL_FACEBOOK_URL,
   SOCIAL_INSTAGRAM_URL,
   SOCIAL_LINKEDIN_URL,
+  SOCIAL_TIKTOK_URL,
   SOCIAL_YOUTUBE_URL,
 } from "@/app/lib/site-links";
 
@@ -37,7 +38,7 @@ const socialItems: { label: string; href: string; icon: IconDefinition }[] = [
   { label: "LinkedIn", href: SOCIAL_LINKEDIN_URL, icon: faLinkedinIn },
   { label: "YouTube", href: SOCIAL_YOUTUBE_URL, icon: faYoutube },
   { label: "Facebook", href: SOCIAL_FACEBOOK_URL, icon: faFacebookF },
-  { label: "TikTok", href: "#", icon: faTiktok },
+  { label: "TikTok", href: SOCIAL_TIKTOK_URL, icon: faTiktok },
 ];
 
 export default function Footer() {
