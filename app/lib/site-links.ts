@@ -16,6 +16,13 @@ export const APPLE_STANDARD_EULA_URL =
 export const WEB_TERMS_PAGE_PATH = "/terms-of-use";
 export const PRIVACY_PAGE_PATH = "/privacy";
 
+/** Official Immigrant Knowhow social profiles (marketing site). */
+export const SOCIAL_FACEBOOK_URL = "https://www.facebook.com/immigrantknowhow";
+export const SOCIAL_INSTAGRAM_URL = "https://www.instagram.com/immigrant_knowhow/";
+export const SOCIAL_LINKEDIN_URL =
+  "https://www.linkedin.com/company/immigrant-knowhow/";
+export const SOCIAL_YOUTUBE_URL = "https://www.youtube.com/@immigrantknowhow";
+
 export type LibrarySearchParams = {
   search?: string;
   page?: string;

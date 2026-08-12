@@ -17,6 +17,13 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 
+import {
+  SOCIAL_FACEBOOK_URL,
+  SOCIAL_INSTAGRAM_URL,
+  SOCIAL_LINKEDIN_URL,
+  SOCIAL_YOUTUBE_URL,
+} from "@/app/lib/site-links";
+
 const quickLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "#" },
@@ -25,11 +32,11 @@ const quickLinks: { label: string; href: string }[] = [
 ];
 
 const socialItems: { label: string; href: string; icon: IconDefinition }[] = [
-  { label: "Instagram", href: "#", icon: faInstagram },
+  { label: "Instagram", href: SOCIAL_INSTAGRAM_URL, icon: faInstagram },
   { label: "X", href: "#", icon: faXTwitter },
-  { label: "LinkedIn", href: "#", icon: faLinkedinIn },
-  { label: "YouTube", href: "#", icon: faYoutube },
-  { label: "Facebook", href: "#", icon: faFacebookF },
+  { label: "LinkedIn", href: SOCIAL_LINKEDIN_URL, icon: faLinkedinIn },
+  { label: "YouTube", href: SOCIAL_YOUTUBE_URL, icon: faYoutube },
+  { label: "Facebook", href: SOCIAL_FACEBOOK_URL, icon: faFacebookF },
   { label: "TikTok", href: "#", icon: faTiktok },
 ];
 
