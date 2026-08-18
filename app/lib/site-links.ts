@@ -22,7 +22,7 @@ export const SOCIAL_INSTAGRAM_URL = "https://www.instagram.com/immigrant_knowhow
 export const SOCIAL_LINKEDIN_URL =
   "https://www.linkedin.com/company/immigrant-knowhow/";
 export const SOCIAL_YOUTUBE_URL = "https://www.youtube.com/@immigrantknowhow";
-export const SOCIAL_TIKTOK_URL = "https://www.tiktok.com/@immigrantknowhow";
+export const SOCIAL_TIKTOK_URL = "https://www.tiktok.com/@carocibainc5";
 
 export type LibrarySearchParams = {
   search?: string;
